@@ -22,11 +22,12 @@ jobs:
         run: |
           make html
 
-      - name: create .nojekyll
+      - name: copy html
         run: touch build/html/.nojekyll
+             cp -r build/html/* docs/
 
       - name: Push to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build/html
+          publish_dir: ./docs
