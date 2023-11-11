@@ -21,7 +21,6 @@ jobs:
       - name: build doc
         run: |
           make html
-          cp scripts/mermaid.js build/html/_static/
 
       - name: create .nojekyll
         run: touch build/html/.nojekyll
