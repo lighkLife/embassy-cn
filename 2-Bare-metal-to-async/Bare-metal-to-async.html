@@ -1,14 +1,15 @@
 <!doctype html>
-<html class="no-js" lang="zh_CN">
+<html class="no-js" lang="zh-CN" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="执行器 Executor" href="../3-Executor/index.html" /><link rel="prev" title="在裸机上异步" href="index.html" />
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="执行器 Executor" href="../3-Executor/index.html" /><link rel="prev" title="在裸机上异步" href="index.html" />
 
-    <meta name="generator" content="sphinx-4.3.2, furo 2022.06.21"/>
+    <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
         <title>From bare metal to async Rust - embassy-cn 0.1.0 文档</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
     
     
 
@@ -148,39 +149,39 @@
   <span class="sidebar-brand-text">embassy-cn 0.1.0 文档</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
-  <input class="sidebar-search" placeholder=搜索 name="q" aria-label="搜索">
+  <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../0-Embassy/Embassy.html">Embassy</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../1-Getting-started/index.html">快速开始</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../1-Getting-started/index.html">快速开始</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of 快速开始</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../1-Getting-started/Basic-application.html">A basic Embassy application</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">在裸机上异步</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">在裸机上异步</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of 在裸机上异步</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">From bare metal to async Rust</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../3-Executor/index.html">执行器 Executor</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3-Executor/index.html">执行器 Executor</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of 执行器 Executor</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../3-Executor/executor.html">执行器 Executor</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../4-HAL/index.html">硬件抽象层 HAL</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../4-HAL/index.html">硬件抽象层 HAL</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of 硬件抽象层 HAL</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../4-HAL/nRF.html">Embassy nRF HAL</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../4-HAL/STM32.html">Embassy STM32 HAL</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../5-Bootloader/index.html">引导程序</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../5-Bootloader/index.html">引导程序</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of 引导程序</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../5-Bootloader/Bootloader.html">Bootloader</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../6-Examples/index.html">例子</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../6-Examples/index.html">例子</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of 例子</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../6-Examples/Examples.html">Examples</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../7-Developer/index.html">开发者文档</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../7-Developer/index.html">开发者文档</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of 开发者文档</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../7-Developer/Developer-STM32.html">Developer Documentation: STM32</a></li>
 </ul>
 </li>
@@ -203,7 +204,8 @@
           <span>Back to top</span>
         </a>
         <div class="content-icon-container">
-          <div class="theme-toggle-container theme-toggle-content">
+          
+<div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -217,13 +219,13 @@
           </label>
         </div>
         <article role="main">
-          <div class="section" id="from-bare-metal-to-async-rust">
-<h1>From bare metal to async Rust<a class="headerlink" href="#from-bare-metal-to-async-rust" title="永久链接至标题">#</a></h1>
+          <section id="from-bare-metal-to-async-rust">
+<h1>From bare metal to async Rust<a class="headerlink" href="#from-bare-metal-to-async-rust" title="Link to this heading">#</a></h1>
 <p>If you’re new to Embassy, it can be overwhelming to grasp all the terminology and concepts. This guide aims to clarify the different layers in Embassy, which problem each layer solves for the application writer.</p>
 <p>This guide uses the STM32 IOT01A board, but should be easy to translate to any STM32 chip. For nRF, the PAC itself is not maintained within the Embassy project, but the concepts and the layers are similar.</p>
 <p>The application we’ll write is a simple ‘push button, blink led’ application, which is great for illustrating input and output handling for each of the examples we’ll go through. We’ll start at the Peripheral Access Crate (PAC) example and end at the async example.</p>
-<div class="section" id="pac-version">
-<h2>PAC version<a class="headerlink" href="#pac-version" title="永久链接至标题">#</a></h2>
+<section id="pac-version">
+<h2>PAC version<a class="headerlink" href="#pac-version" title="Link to this heading">#</a></h2>
 <p>The PAC is the lowest API for accessing peripherals and registers, if you don’t count reading/writing directly to memory addresses. It provides distinct types to make accessing peripheral registers easier, but it does not prevent you from writing unsafe code.</p>
 <p>Writing an application using the PAC directly is therefore not recommended, but if the functionality you want to use is not exposed in the upper layers, that’s what you need to use.</p>
 <p>The blinky app using PAC is shown below:</p>
@@ -284,9 +286,9 @@
 </div>
 <p>As you can see, a lot of code is needed to enable the peripheral clocks and to configure the input pins and the output pins of the application.</p>
 <p>Another downside of this application is that it is busy-looping while polling the button state. This prevents the microcontroller from utilizing any sleep mode to save power.</p>
-</div>
-<div class="section" id="hal-version">
-<h2>HAL version<a class="headerlink" href="#hal-version" title="永久链接至标题">#</a></h2>
+</section>
+<section id="hal-version">
+<h2>HAL version<a class="headerlink" href="#hal-version" title="Link to this heading">#</a></h2>
 <p>To simplify our application, we can use the HAL instead. The HAL exposes higher level APIs that handle details such as:</p>
 <ul class="simple">
 <li><p>Automatically enabling the peripheral clock when you’re using the peripheral</p></li>
@@ -319,9 +321,9 @@
 </div>
 <p>As you can see, the application becomes a lot simpler, even without using any async code. The <code class="docutils literal notranslate"><span class="pre">Input</span></code> and <code class="docutils literal notranslate"><span class="pre">Output</span></code> types hide all the details of accessing the GPIO registers and allow you to use a much simpler API for querying the state of the button and toggling the LED output.</p>
 <p>The same downside from the PAC example still applies though: the application is busy looping and consuming more power than necessary.</p>
-</div>
-<div class="section" id="interrupt-driven">
-<h2>Interrupt driven<a class="headerlink" href="#interrupt-driven" title="永久链接至标题">#</a></h2>
+</section>
+<section id="interrupt-driven">
+<h2>Interrupt driven<a class="headerlink" href="#interrupt-driven" title="Link to this heading">#</a></h2>
 <p>To save power, we need to configure the application so that it can be notified when the button is pressed using an interrupt.</p>
 <p>Once the interrupt is configured, the application can instruct the microcontroller to enter a sleep mode, consuming very little power.</p>
 <p>Given Embassy focus on async Rust (which we’ll come back to after this example), the example application must use a combination of the HAL and PAC in order to use interrupts. For this reason, the application also contains some helper functions to access the PAC (not shown below).</p>
@@ -387,9 +389,9 @@
 <p>The simple application is now more complex again, primarily because of the need to keep the button and LED states in the global scope where it is accessible by the main application loop, as well as the interrupt handler.</p>
 <p>To do that, the types must be guarded by a mutex, and interrupts must be disabled whenever we are accessing this global state to gain access to the peripherals.</p>
 <p>Luckily, there is an elegant solution to this problem when using Embassy.</p>
-</div>
-<div class="section" id="async-version">
-<h2>Async version<a class="headerlink" href="#async-version" title="永久链接至标题">#</a></h2>
+</section>
+<section id="async-version">
+<h2>Async version<a class="headerlink" href="#async-version" title="Link to this heading">#</a></h2>
 <p>It’s time to use the Embassy capabilities to its fullest. At the core, Embassy has an async excecutor, or a runtime for async tasks if you will. The executor polls a set of tasks (defined at compile time), and whenever a task <code class="docutils literal notranslate"><span class="pre">blocks</span></code>, the executor will run another task, or put the microcontroller to sleep.</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="cp">#![no_std]</span>
 <span class="cp">#![no_main]</span>
@@ -425,12 +427,12 @@
 </ul>
 <p>When <code class="docutils literal notranslate"><span class="pre">button.await_for_any_edge().await</span></code> is called, the executor will pause the main task and put the microcontroller in sleep mode, unless there are other tasks that can run. Internally, the Embassy HAL has configured the interrupt handler for the button (in <code class="docutils literal notranslate"><span class="pre">ExtiButton</span></code>), so that whenever an interrupt is raised, the task awaiting the button will be woken up.</p>
 <p>The minimal overhead of the executor and the ability to run multiple tasks “concurrently” combined with the enormous simplification of the application, makes <code class="docutils literal notranslate"><span class="pre">async</span></code> a great fit for embedded.</p>
-</div>
-<div class="section" id="summary">
-<h2>Summary<a class="headerlink" href="#summary" title="永久链接至标题">#</a></h2>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
 <p>We have seen how the same application can be written at the different abstraction levels in Embassy. First starting out at the PAC level, then using the HAL, then using interrupts, and then using interrupts indirectly using async Rust.</p>
-</div>
-</div>
+</section>
+</section>
 
         </article>
       </div>
@@ -444,10 +446,10 @@
                 </div>
                 <div class="title">执行器 Executor</div>
               </div>
-              <svg><use href="#svg-arrow-right"></use></svg>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
           <a class="prev-page" href="index.html">
-              <svg><use href="#svg-arrow-right"></use></svg>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
@@ -469,9 +471,7 @@
             
           </div>
           <div class="right-details">
-            <div class="icons">
-              
-            </div>
+            
           </div>
         </div>
         
@@ -483,7 +483,7 @@
       <div class="toc-sticky toc-scroll">
         <div class="toc-title-container">
           <span class="toc-title">
-            目录
+            On this page
           </span>
         </div>
         <div class="toc-tree-container">
@@ -506,11 +506,10 @@
       
     </aside>
   </div>
-</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/scripts/furo.js"></script>
-    <script src="../_static/translations.js"></script>
+</div><script src="../_static/documentation_options.js?v=d786bb5c"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../_static/translations.js?v=beaddf03"></script>
     </body>
 </html>

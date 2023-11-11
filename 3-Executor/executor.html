@@ -1,14 +1,15 @@
 <!doctype html>
-<html class="no-js" lang="zh_CN">
+<html class="no-js" lang="zh-CN" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="硬件抽象层 HAL" href="../4-HAL/index.html" /><link rel="prev" title="执行器 Executor" href="index.html" />
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="硬件抽象层 HAL" href="../4-HAL/index.html" /><link rel="prev" title="执行器 Executor" href="index.html" />
 
-    <meta name="generator" content="sphinx-4.3.2, furo 2022.06.21"/>
+    <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
         <title>执行器 Executor - embassy-cn 0.1.0 文档</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
     
     
 
@@ -148,39 +149,39 @@
   <span class="sidebar-brand-text">embassy-cn 0.1.0 文档</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
-  <input class="sidebar-search" placeholder=搜索 name="q" aria-label="搜索">
+  <input class="sidebar-search" placeholder="搜索" name="q" aria-label="搜索">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../0-Embassy/Embassy.html">Embassy</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../1-Getting-started/index.html">快速开始</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../1-Getting-started/index.html">快速开始</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of 快速开始</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../1-Getting-started/Basic-application.html">A basic Embassy application</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../2-Bare-metal-to-async/index.html">在裸机上异步</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../2-Bare-metal-to-async/index.html">在裸机上异步</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of 在裸机上异步</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../2-Bare-metal-to-async/Bare-metal-to-async.html">From bare metal to async Rust</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">执行器 Executor</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">执行器 Executor</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of 执行器 Executor</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">执行器 Executor</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../4-HAL/index.html">硬件抽象层 HAL</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../4-HAL/index.html">硬件抽象层 HAL</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of 硬件抽象层 HAL</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../4-HAL/nRF.html">Embassy nRF HAL</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../4-HAL/STM32.html">Embassy STM32 HAL</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../5-Bootloader/index.html">引导程序</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../5-Bootloader/index.html">引导程序</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of 引导程序</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../5-Bootloader/Bootloader.html">Bootloader</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../6-Examples/index.html">例子</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../6-Examples/index.html">例子</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of 例子</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../6-Examples/Examples.html">Examples</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../7-Developer/index.html">开发者文档</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../7-Developer/index.html">开发者文档</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of 开发者文档</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../7-Developer/Developer-STM32.html">Developer Documentation: STM32</a></li>
 </ul>
 </li>
@@ -203,7 +204,8 @@
           <span>Back to top</span>
         </a>
         <div class="content-icon-container">
-          <div class="theme-toggle-container theme-toggle-content">
+          
+<div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -217,12 +219,12 @@
           </label>
         </div>
         <article role="main">
-          <div class="section" id="executor">
-<h1>执行器 Executor<a class="headerlink" href="#executor" title="永久链接至标题">#</a></h1>
+          <section id="executor">
+<h1>执行器 Executor<a class="headerlink" href="#executor" title="Link to this heading">#</a></h1>
 <p>原文： https://embassy.dev/book/dev/runtime.html</p>
 <p>Embassy 执行器（executor）是一个为嵌入式设计的异步/等待（async/await）执行器，支持中断和定时器。</p>
-<div class="section" id="id1">
-<h2>功能特性<a class="headerlink" href="#id1" title="永久链接至标题">#</a></h2>
+<section id="id1">
+<h2>功能特性<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>无需手动分配，不需要堆；任务都是静态分配的。</p></li>
 <li><p>动态大小；无需配置或调整，执行器就可以1到1000个任务；</p></li>
@@ -232,9 +234,9 @@
 <li><p>公平：即使给定任务不断被唤醒，给定任务也不会独占CPU时间。在给定任务第二次轮询之前，其他任务都有机会运行。</p></li>
 <li><p>支持创建多个执行器实例，并以不同优先级运行任务。遇到优先级低的任务，较高优先级的任务可以抢占运行。</p></li>
 </ul>
-</div>
-<div class="section" id="id2">
-<h2>执行器<a class="headerlink" href="#id2" title="永久链接至标题">#</a></h2>
+</section>
+<section id="id2">
+<h2>执行器<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
 <p>执行器功能的描述如下：</p>
 <ul class="simple">
 <li><p>执行器保存一个它需要轮询的任务队列.</p></li>
@@ -247,9 +249,9 @@
 </div></blockquote>
 <p><img alt="Executor model" src="https://embassy.dev/book/dev/_images/embassy_executor.png" /></p>
 <p>如果在你的应用程序中使用了<code class="docutils literal notranslate"><span class="pre">#[embassy_executor::main]</span></code>宏，那它就会为你创建执行器，并创建主入口点来作为第一个任务。你也可以手动创建执行器，而且可以创建多个执行器。</p>
-</div>
-<div class="section" id="id3">
-<h2>中断<a class="headerlink" href="#id3" title="永久链接至标题">#</a></h2>
+</section>
+<section id="id3">
+<h2>中断<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
 <p>中断是外设发出操作完成信号的通用机制，这种机制很适合异步执行模型。下图描述一个典型的应用执行流程：</p>
 <ul class="simple">
 <li><p>（1）任务被轮询，并尝试取得进展。</p></li>
@@ -262,17 +264,17 @@
 <blockquote>
 <div><p>这里有一个叫<code class="docutils literal notranslate"><span class="pre">InterruptExecutor</span></code>的特殊执行器，他由中断驱动。通过创建多个<code class="docutils literal notranslate"><span class="pre">InterruptExecutor</span></code>实例，可以驱动不同优先级的任务。</p>
 </div></blockquote>
-</div>
-<div class="section" id="id4">
-<h2>定时<a class="headerlink" href="#id4" title="永久链接至标题">#</a></h2>
+</section>
+<section id="id4">
+<h2>定时<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
 <p>Embassy 有一个内部的定时器队列，可以通过设置<code class="docutils literal notranslate"><span class="pre">time</span></code>特性标记来启用。启用后，Embassy 假定平台已经存在一个计时器的驱动的实现。Embassy 为 nRF、STM32、RPi Pico、WASM 和 Std 平台提供了时间驱动程序。</p>
 <p>嵌入式平台的定时器驱动程序的实现，可能仅支持设置固定数量的警报。请确保你同时使用的计时器任务数量不超过此限制。</p>
 <p>定时器速度可在编译时使用<code class="docutils literal notranslate"><span class="pre">time-tick-&lt;frequency&gt;</span></code>配置。目前，定时器可以配置为以 1000 Hz、32768 Hz 或 1 MHz 来运行。在更改默认值之前，请确保目标 HAL 支持特定频率的设置。</p>
 <blockquote>
 <div><p>如果您的应用程序不需要计时器，则不要启用<code class="docutils literal notranslate"><span class="pre">time</span></code>功能，这样可以节省一些 CPU 周期并降低功耗。</p>
 </div></blockquote>
-</div>
-</div>
+</section>
+</section>
 
         </article>
       </div>
@@ -286,10 +288,10 @@
                 </div>
                 <div class="title">硬件抽象层 HAL</div>
               </div>
-              <svg><use href="#svg-arrow-right"></use></svg>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
           <a class="prev-page" href="index.html">
-              <svg><use href="#svg-arrow-right"></use></svg>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
@@ -311,9 +313,7 @@
             
           </div>
           <div class="right-details">
-            <div class="icons">
-              
-            </div>
+            
           </div>
         </div>
         
@@ -325,7 +325,7 @@
       <div class="toc-sticky toc-scroll">
         <div class="toc-title-container">
           <span class="toc-title">
-            目录
+            On this page
           </span>
         </div>
         <div class="toc-tree-container">
@@ -347,11 +347,10 @@
       
     </aside>
   </div>
-</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/scripts/furo.js"></script>
-    <script src="../_static/translations.js"></script>
+</div><script src="../_static/documentation_options.js?v=d786bb5c"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../_static/translations.js?v=beaddf03"></script>
     </body>
 </html>
