@@ -1,13 +1,19 @@
 # embassy-cn
 
-## 文档翻译
+## 翻译步骤
+1. 在文档翻译列表中填写自己想翻译的章节
+2. 将自己翻译的文章复制到 source 目录下对应的 markdown 文件中
+3. 提交文件到远程仓库。
+
+
+## 文档翻译列表
 | 原章节                                                                                       | 翻译作者      | 状态  |
 |-------------------------------------------------------------------------------------------|-----------|-----|
 | [Embassy](https://embassy.dev/book/dev/index.htmlhttps://embassy.dev/book/dev/index.html) |           |     |
 | [Getting started](https://embassy.dev/book/dev/getting_started.html)                      |           |     |
 | [Basic application](https://embassy.dev/book/dev/basic_application.html)                  |           |     |
 | [Bare metal to async](https://embassy.dev/book/dev/layer_by_layer.html)                   |           |     |
-| [Executor](https://embassy.dev/book/dev/runtime.html)                                     | lighkLife | 已完成 |
+| [Executor](https://embassy.dev/book/dev/runtime.html)                                     | [lighkLife](https://github.com/lighkLife/) | 已完成 |
 | [HAL](https://embassy.dev/book/dev/hal.html)                                              |           |     |
 | [nRF](https://embassy.dev/book/dev/nrf.html)                                              |           |     |
 | [STM32](https://embassy.dev/book/dev/stm32.html)                                          |           |     |
