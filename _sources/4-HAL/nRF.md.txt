@@ -1,41 +1,41 @@
 # Embassy nRF HAL
 
-The [Embassy nRF HAL](https://github.com/embassy-rs/embassy/tree/master/embassy-nrf) is based on the PACs (Peripheral Access Crate) from [nrf-rs](https://github.com/nrf-rs/).
+[Embassy nRF HAL](https://github.com/embassy-rs/embassy/tree/master/embassy-nrf) 基于 [nrf-rs](https://github.com/nrf-rs/) 中的 PACs（外设访问模块）。
 
-## Timer driver
+## 定时器驱动
 
-The nRF timer driver operates at 32768 Hz by default.
+nRF 定时器驱动的默认工作频率为 32768 Hz。
 
-## Peripherals
+## 外设
 
-The following peripherals have a HAL implementation at present
+以下外设目前采用 HAL 实现
 
-- PWM
+- PWM（脉宽调制）
 
-- SPIM
+- SPIM（串行外设接口）
 
-- QSPI
+- QSPI（四线串行外设接口）
 
-- NVMC
+- NVMC（非易失性内存控制器）
 
-- GPIOTE
+- GPIOTE（通用输入输出任务）
 
-- RNG
+- RNG（随机数发生器）
 
-- TIMER
+- TIMER（定时器）
 
-- WDT
+- WDT（看门狗定时器）
 
-- TEMP
+- TEMP（温度传感器）
 
-- PPI
+- PPI（可编程外设接口）
 
-- UARTE
+- UARTE（通用异步接收/发送传输引擎）
 
-- TWIM
+- TWIM（双线串行外设接口）
 
-- SAADC
+- SAADC（模拟到数字转换器）
 
-## Bluetooth
+## 蓝牙
 
-For bluetooth, you can use the [nrf-softdevice](https://github.com/embassy-rs/nrf-softdevice) crate.
+对于蓝牙，你可以使用 [nrf-softdevice](https://github.com/embassy-rs/nrf-softdevice) crate.
