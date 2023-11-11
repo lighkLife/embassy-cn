@@ -14,8 +14,8 @@
 | [Basic application](https://embassy.dev/book/dev/basic_application.html)                  |           |     |
 | [Bare metal to async](https://embassy.dev/book/dev/layer_by_layer.html)                   |           |     |
 | [Executor](https://embassy.dev/book/dev/runtime.html)                                     | [lighkLife](https://github.com/lighkLife/) | 已完成 |
-| [HAL](https://embassy.dev/book/dev/hal.html)                                              | [lighkLife](https://github.com/lighkLife/) | 已完成 |
-| [nRF](https://embassy.dev/book/dev/nrf.html)                                              |           |     |
+| [HAL](https://embassy.dev/book/dev/hal.html)                                              | [Luv_Ray](https://github.com/Luv-Ray/) | 已完成 |
+| [nRF](https://embassy.dev/book/dev/nrf.html)                                              | [Luv_Ray](https://github.com/Luv-Ray/) | 已完成 |
 | [STM32](https://embassy.dev/book/dev/stm32.html)                                          |           |     |
 | [Bootloader](https://embassy.dev/book/dev/bootloader.html)                                |           |     |
 | [Examples](https://embassy.dev/book/dev/examples.html)                                    |           |     |

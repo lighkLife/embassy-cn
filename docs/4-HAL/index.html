@@ -227,14 +227,14 @@
 <li class="toctree-l1"><a class="reference internal" href="STM32.html">Embassy STM32 HAL</a></li>
 </ul>
 </div>
-<p>Embassy provides HALs for several microcontroller families:</p>
+<p>Embassy 为多个单片机系列提供了硬件抽象层：</p>
 <ul class="simple">
-<li><p><cite>embassy-nrf</cite> for the nRF microcontrollers from Nordic Semiconductor</p></li>
-<li><p><cite>embassy-stm32</cite> for STM32 microcontrollers from ST Microelectronics</p></li>
-<li><p><cite>embassy-rp</cite> for the Raspberry Pi RP2040 microcontrollers</p></li>
+<li><p><cite>embassy-nrf</cite>：北欧半导体公司的 nRF 微控制器</p></li>
+<li><p><cite>embassy-stm32</cite>： 意法半导体的 STM32 微控制器</p></li>
+<li><p><cite>embassy-rp</cite> 树莓派的 RP2040 微控制器</p></li>
 </ul>
-<p>These HALs implement async/await functionality for most peripherals while also implementing the async traits in <cite>embedded-hal</cite> and <cite>embedded-hal-async</cite>. You can also use these HALs with another executor.</p>
-<p>For the ESP32 series, there is an [esp-hal](<a class="reference external" href="https://github.com/esp-rs/esp-hal">https://github.com/esp-rs/esp-hal</a>) which you can use.</p>
+<p>这些硬件抽象层为大多数外设实现了异步等待（<cite>async/await</cite>）功能，同时，在`embedded-hal`和`embedded-hal-async`中实现了异步接口（async traits）。也你也可以选择其他执行器（即异步运行时）来使用这些硬件抽象层提供的函数。</p>
+<p>针对 ESP32 系列的微控制器，可以使用 [esp-hal](<a class="reference external" href="https://github.com/esp-rs/esp-hal">https://github.com/esp-rs/esp-hal</a>) 库。</p>
 </section>
 
         </article>
