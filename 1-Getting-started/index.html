@@ -1,0 +1,376 @@
+<!doctype html>
+<html class="no-js" lang="zh_CN">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="A basic Embassy application" href="Basic-application.html" /><link rel="prev" title="Embassy" href="../0-Embassy/Embassy.html" />
+
+    <meta name="generator" content="sphinx-4.3.2, furo 2022.06.21"/>
+        <title>快速开始 - embassy-cn 0.1.0 文档</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">embassy-cn 0.1.0 文档</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">embassy-cn 0.1.0 文档</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder=搜索 name="q" aria-label="搜索">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../0-Embassy/Embassy.html">Embassy</a></li>
+<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">快速开始</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Basic-application.html">A basic Embassy application</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../2-Bare-metal-to-async/index.html">在裸机上异步</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../2-Bare-metal-to-async/Bare-metal-to-async.html">From bare metal to async Rust</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3-Executor/index.html">执行器 Executor</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3-Executor/executor.html">执行器 Executor</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../4-HAL/index.html">硬件抽象层 HAL</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../4-HAL/nRF.html">Embassy nRF HAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4-HAL/STM32.html">Embassy STM32 HAL</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../5-Bootloader/index.html">引导程序</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../5-Bootloader/Bootloader.html">Bootloader</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../6-Examples/index.html">例子</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../6-Examples/Examples.html">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../7-Developer/index.html">开发者文档</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../7-Developer/Developer-STM32.html">Developer Documentation: STM32</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <div class="section" id="id1">
+<h1>快速开始<a class="headerlink" href="#id1" title="永久链接至标题">#</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Basic-application.html">A basic Embassy application</a></li>
+</ul>
+</div>
+<p>So you want to try Embassy, great! To get started, there are a few tools you need to install:</p>
+<ul class="simple">
+<li><p>[rustup](<a class="reference external" href="https://rustup.rs/">https://rustup.rs/</a>) - the Rust toolchain is needed to compile Rust code.</p></li>
+<li><p>[probe-rs](<a class="reference external" href="https://crates.io/crates/probe-rs">https://crates.io/crates/probe-rs</a>) - to flash the firmware on your device. If you already have other tools like <cite>OpenOCD</cite> setup, you can use that as well.</p></li>
+</ul>
+<p>If you don’t have any supported board, don’t worry: you can also run embassy on your PC using the <cite>std</cite> examples.</p>
+<div class="section" id="getting-a-board-with-examples">
+<h2>Getting a board with examples<a class="headerlink" href="#getting-a-board-with-examples" title="永久链接至标题">#</a></h2>
+<p>Embassy supports many microcontroller families, but the easiest ways to get started is if you have one of the more common development kits.</p>
+<div class="section" id="nrf-kits">
+<h3>nRF kits<a class="headerlink" href="#nrf-kits" title="永久链接至标题">#</a></h3>
+<ul class="simple">
+<li><p>[nRF52 DK](<a class="reference external" href="https://www.nordicsemi.com/Products/Development-hardware/nrf52-dk">https://www.nordicsemi.com/Products/Development-hardware/nrf52-dk</a>)</p></li>
+<li><p>[nRF9160 DK](<a class="reference external" href="https://www.nordicsemi.com/Products/Development-hardware/nRF9160-DK">https://www.nordicsemi.com/Products/Development-hardware/nRF9160-DK</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="stm32-kits">
+<h3>STM32 kits<a class="headerlink" href="#stm32-kits" title="永久链接至标题">#</a></h3>
+<ul class="simple">
+<li><p>[STM32 Nucleo-144 development board with STM32H743ZI MCU](<a class="reference external" href="https://www.st.com/en/evaluation-tools/nucleo-h743zi.html">https://www.st.com/en/evaluation-tools/nucleo-h743zi.html</a>)</p></li>
+<li><p>[STM32 Nucleo-144 development board with STM32F429ZI MCU](<a class="reference external" href="https://www.st.com/en/evaluation-tools/nucleo-f429zi.html">https://www.st.com/en/evaluation-tools/nucleo-f429zi.html</a>)</p></li>
+<li><p>[STM32L4+ Discovery kit IoT node, low-power wireless, BLE, NFC, WiFi](<a class="reference external" href="https://www.st.com/en/evaluation-tools/b-l4s5i-iot01a.html">https://www.st.com/en/evaluation-tools/b-l4s5i-iot01a.html</a>)</p></li>
+<li><p>[STM32L0 Discovery kit LoRa, Sigfox, low-power wireless](<a class="reference external" href="https://www.st.com/en/evaluation-tools/b-l072z-lrwan1.html">https://www.st.com/en/evaluation-tools/b-l072z-lrwan1.html</a>)</p></li>
+<li><p>[STM32 Nucleo-64 development board with STM32WL55JCI MCU](<a class="reference external" href="https://www.st.com/en/evaluation-tools/nucleo-wl55jc.html">https://www.st.com/en/evaluation-tools/nucleo-wl55jc.html</a>)</p></li>
+<li><p>[Discovery kit for IoT node with STM32U5 series](<a class="reference external" href="https://www.st.com/en/evaluation-tools/b-u585i-iot02a.html">https://www.st.com/en/evaluation-tools/b-u585i-iot02a.html</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="rp2040-kits">
+<h3>RP2040 kits<a class="headerlink" href="#rp2040-kits" title="永久链接至标题">#</a></h3>
+<ul class="simple">
+<li><p>[Raspberry Pi Pico](<a class="reference external" href="https://www.raspberrypi.com/products/raspberry-pi-pico/">https://www.raspberrypi.com/products/raspberry-pi-pico/</a>)</p></li>
+</ul>
+</div>
+<div class="section" id="esp32">
+<h3>ESP32<a class="headerlink" href="#esp32" title="永久链接至标题">#</a></h3>
+<ul class="simple">
+<li><p>[ESP32C3](<a class="reference external" href="https://github.com/esp-rs/esp-rust-board">https://github.com/esp-rs/esp-rust-board</a>)</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="running-an-example">
+<h2>Running an example<a class="headerlink" href="#running-an-example" title="永久链接至标题">#</a></h2>
+<p>First you need to clone the [github repository];</p>
+<p><code class="docutils literal notranslate"><span class="pre">`bash</span>
+<span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/embassy-rs/embassy.git</span>
+<span class="pre">cd</span> <span class="pre">embassy</span>
+<span class="pre">`</span></code></p>
+<p>You can run an example by opening a terminal and entering the following commands:</p>
+<p><code class="docutils literal notranslate"><span class="pre">`bash</span>
+<span class="pre">cd</span> <span class="pre">examples/nrf52840</span>
+<span class="pre">cargo</span> <span class="pre">run</span> <span class="pre">--bin</span> <span class="pre">blinky</span> <span class="pre">--release</span>
+<span class="pre">`</span></code></p>
+</div>
+<div class="section" id="whats-next">
+<h2>What’s next?<a class="headerlink" href="#whats-next" title="永久链接至标题">#</a></h2>
+<p>Congratulations, you have your first Embassy application running! Here are some alternatives on where to go from here:</p>
+<ul class="simple">
+<li><p>Read more about the [executor](<a class="reference external" href="https://embassy.dev/book/dev/runtime.html">https://embassy.dev/book/dev/runtime.html</a>).</p></li>
+<li><p>Read more about the [HAL](<a class="reference external" href="https://embassy.dev/book/dev/hal.html">https://embassy.dev/book/dev/hal.html</a>).</p></li>
+<li><p>Start [writing your application](<a class="reference external" href="https://embassy.dev/book/dev/basic_application.html">https://embassy.dev/book/dev/basic_application.html</a>).</p></li>
+</ul>
+</div>
+</div>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="Basic-application.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">A basic Embassy application</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../0-Embassy/Embassy.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Embassy</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, lighk
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            目录
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">快速开始</a><ul>
+<li><a class="reference internal" href="#getting-a-board-with-examples">Getting a board with examples</a><ul>
+<li><a class="reference internal" href="#nrf-kits">nRF kits</a></li>
+<li><a class="reference internal" href="#stm32-kits">STM32 kits</a></li>
+<li><a class="reference internal" href="#rp2040-kits">RP2040 kits</a></li>
+<li><a class="reference internal" href="#esp32">ESP32</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#running-an-example">Running an example</a></li>
+<li><a class="reference internal" href="#whats-next">What’s next?</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    <script src="../_static/translations.js"></script>
+    </body>
+</html>
