@@ -1,0 +1,48 @@
+# Embassy
+
+Embassy is a project to make async/await a first-class option for embedded development.
+
+## What is async?
+
+When handling I/O, software must call functions that block program execution until the I/O operation completes. When running inside of an OS such as Linux, such functions generally transfer control to the kernel so that another task, known as a thread, can be executed if available, or the CPU can be put to sleep until another such task is ready to perform more work. Because an OS cannot presume that threads will behave cooperatively, threads are relatively resource-intensive, and may be forcibly interrupted they do not transfer control back to the kernel within an allotted time. But if tasks could be presumed to behave cooperatively, or at least not maliciously, it would be possible to create tasks that appear to be almost free when compared to a traditional OS thread. In Rust, these lightweight tasks, known as 'coroutines' or 'goroutines' in other languages, are implemented with async.
+
+Async-await works by transforming each async function into an object called a future. When a future blocks on I/O the future yields, and the scheduler, called an executor, can select a different future to execute. Compared to alternatives such as an RTOS, async can yield better performance and lower power consumption because the executor doesn’t have to guess when a future is ready to execute. However, program size may be higher than other alternatives, which may be a problem for certain space-constrained devices with very low memory. On the devices Embassy supports, such as stm32 and nrf, memory is generally large enough to accommodate the modestly-increased program size.
+
+## What is Embassy?
+
+The Embassy project consists of several crates that you can use together or independently:
+
+- **Executor** - The [embassy-executor](https://docs.embassy.dev/embassy-executor/) is an async/await executor that generally executes a fixed number of tasks, allocated at startup, though more can be added later. The HAL is an API that you can use to access peripherals, such as USART, UART, I2C, SPI, CAN, and USB. Embassy provides implementations of both async and blocking APIs where it makes sense. DMA (Direct Memory Access) is an example where async is a good fit, whereas GPIO states are a better fit for a blocking API. The executor may also provide a system timer that you can use for both async and blocking delays. For less than one microsecond, blocking delays should be used because the cost of context-switching is too high and the executor will be unable to provide accurate timing.
+
+- **Hardware Abstraction Layers** - HALs implement safe, idiomatic Rust APIs to use the hardware capabilities, so raw register manipulation is not needed. The Embassy project maintains HALs for select hardware, but you can still use HALs from other projects with Embassy.
+  
+  - [embassy-stm32](https://docs.embassy.dev/embassy-stm32/), for all STM32 microcontroller families.
+  
+  - [embassy-nrf](https://docs.embassy.dev/embassy-nrf/), for the Nordic Semiconductor nRF52, nRF53, nRF91 series.
+  
+  - [embassy-rp](https://docs.embassy.dev/embassy-rp/), for the Raspberry Pi RP2040 microcontroller.
+  
+  - [esp-rs](https://github.com/esp-rs), for the Espressif Systems ESP32 series of chips.
+    
+> **Note** <br>
+> A common question is if one can use the Embassy HALs standalone. Yes, it is possible! There are no dependency on the executor within the HALs. You can even use them without async, as they implement both the [Embedded HAL](https://github.com/rust-embedded/embedded-hal) blocking and async traits. |
+
+- **Networking** - The [embassy-net](https://docs.embassy.dev/embassy-net/) network stack implements extensive networking functionality, including Ethernet, IP, TCP, UDP, ICMP and DHCP. Async drastically simplifies managing timeouts and serving multiple connections concurrently. Several drivers for WiFi and Ethernet chips can be found.
+
+- **Bluetooth** - The [nrf-softdevice](https://github.com/embassy-rs/nrf-softdevice) crate provides Bluetooth Low Energy 4.x and 5.x support for nRF52 microcontrollers.
+
+- **LoRa** - [lora-phy](https://github.com/embassy-rs/lora-phy) and [embassy-lora](https://docs.embassy.dev/embassy-lora/) supports LoRa networking on a wide range of LoRa radios, fully integrated with a Rust [LoRaWAN](https://github.com/ivajloip/rust-lorawan) implementation.
+
+- **USB** - [embassy-usb](https://docs.embassy.dev/embassy-usb/) implements a device-side USB stack. Implementations for common classes such as USB serial (CDC ACM) and USB HID are available, and a rich builder API allows building your own.
+
+- **Bootloader and DFU** - [embassy-boot](https://github.com/embassy-rs/embassy/tree/master/embassy-boot) is a lightweight bootloader supporting firmware application upgrades in a power-fail-safe way, with trial boots and rollbacks.
+
+## Resources
+
+For more reading material on async Rust and Embassy:
+
+- [Comparsion of FreeRTOS and Embassy](https://tweedegolf.nl/en/blog/65/async-rust-vs-rtos-showdown)
+
+- [Tutorials](https://dev.to/apollolabsbin/series/20707)
+
+- [Firmware Updates with Embassy](https://blog.drogue.io/firmware-updates-part-1/)
