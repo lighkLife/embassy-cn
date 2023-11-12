@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="例子" href="../6-Examples/index.html" /><link rel="prev" title="引导程序" href="index.html" />
 
     <meta name="generator" content="sphinx-4.3.2, furo 2022.06.21"/>
-        <title>Bootloader - embassy-cn 0.1.0 文档</title>
+        <title>引导程序 - embassy-cn 0.1.0 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -133,7 +133,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -173,11 +173,7 @@
 </ul>
 </li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">引导程序</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Bootloader</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id1">硬件支持</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id2">设计</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#firmwareupdater"><code class="docutils literal notranslate"><span class="pre">FirmwareUpdater</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id3"><code class="docutils literal notranslate"><span class="pre">验证</span></code></a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">引导程序</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../6-Examples/index.html">例子</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -215,21 +211,20 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <div class="section" id="bootloader">
-<h1>Bootloader<a class="headerlink" href="#bootloader" title="永久链接至标题">#</a></h1>
+          <div class="section" id="id1">
+<h1>引导程序<a class="headerlink" href="#id1" title="永久链接至标题">#</a></h1>
 <p><code class="docutils literal notranslate"><span class="pre">embassy-boot</span></code> 是一个轻量级引导加载程序，支持以断电保护安全方式升级固件应用程序，并且还具有尝试引导和回滚的功能。</p>
 <p>如果你对默认的配置和功能满意，可以将此引导加载程序作为库，或者直接刷入。</p>
 <p>在设计上，引导加载程序不提供任何网络功能。通常是用户应用提供网络功能来获取最新的固件，使用此引导加载程序作为更新固件的库，或者使用此引导加载程序作为库并自己添加这个（网络）功能。</p>
 <p>此引导加载程序根据 <code class="docutils literal notranslate"><span class="pre">embedded-storage</span></code> 介质实现同时支持内部闪存和外部闪存。也支持验证通过数字签名的固件（推荐这么做）。</p>
-</div>
-<div class="section" id="id1">
-<h1>硬件支持<a class="headerlink" href="#id1" title="永久链接至标题">#</a></h1>
+<div class="section" id="id2">
+<h2>硬件支持<a class="headerlink" href="#id2" title="永久链接至标题">#</a></h2>
 <p>此引导加载程序支持以下固件：</p>
 <ul class="simple">
 <li><p>有或没有软设备的 nRF52</p></li>
@@ -238,8 +233,8 @@
 </ul>
 <p>通常此固件程序在所有实现 <code class="docutils literal notranslate"><span class="pre">embedded-storage</span></code> 介质的内部闪存的平台上都可以工作，但是i可能需要一些适配的初始化代码才能工作。</p>
 </div>
-<div class="section" id="id2">
-<h1>设计<a class="headerlink" href="#id2" title="永久链接至标题">#</a></h1>
+<div class="section" id="id3">
+<h2>设计<a class="headerlink" href="#id3" title="永久链接至标题">#</a></h2>
 <p><img alt="Bootloader flash layout" src="https://embassy.dev/book/dev/_images/bootloader_flash.png" /></p>
 <p>此引导加载程序把存储介质分为 4 个主要的分区，可以在创建引导加载程序实例的时候或者通过链接脚本（linker script）来配置：</p>
 <ul class="simple">
@@ -258,11 +253,11 @@
 <p>此引导加载程序有一个平台无关的部分，这部分实现了断电保护的交换算法，该算法的交换边界由分区提供。平台相关的部分是少量的附加代码，提供了例如看门狗（watchdogs）或者支持 nRF52 软设备的额外实现。</p>
 </div>
 <div class="section" id="firmwareupdater">
-<h1><code class="docutils literal notranslate"><span class="pre">FirmwareUpdater</span></code><a class="headerlink" href="#firmwareupdater" title="永久链接至标题">#</a></h1>
+<h2><code class="docutils literal notranslate"><span class="pre">FirmwareUpdater</span></code><a class="headerlink" href="#firmwareupdater" title="永久链接至标题">#</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">FirmwareUpdater</span></code> 是一个方便把固件刷入 DFU 分区随后让固件准备好在下一次设备重置的时候交换到 ACTIVE 分区的对象。主要方法是 <code class="docutils literal notranslate"><span class="pre">write_firmware</span></code>，每一个 写块（通常是 4KiB）大小调用一次，全部写入完成后再调用 <code class="docutils literal notranslate"><span class="pre">mark_updated</span></code> 方法。</p>
 </div>
-<div class="section" id="id3">
-<h1><code class="docutils literal notranslate"><span class="pre">验证</span></code><a class="headerlink" href="#id3" title="永久链接至标题">#</a></h1>
+<div class="section" id="id4">
+<h2><code class="docutils literal notranslate"><span class="pre">验证</span></code><a class="headerlink" href="#id4" title="永久链接至标题">#</a></h2>
 <p>此引导加载程序支持验证已刷入 DFU 分区的固件。验证要求使用 <a class="reference external" href="https://ed25519.cr.yp.to/">ed25519</a> 签名对固件进行数字签名。如果验证功能启用，则需要使用 <code class="docutils literal notranslate"><span class="pre">FirmwareUpdater::verify_and_mark_updated</span></code> 来代替上面的 <code class="docutils literal notranslate"><span class="pre">mark_updated</span></code> 方法。该方法需要公钥和签名，以及已闪存的固件的实际长度。如果验证失败那刷入的固件就不会被标记为已更新，因此更新会被拒绝。</p>
 <p>签名一般随着固件提供，但不写入到闪存，具体怎么提供是固件的责任。</p>
 <p>通过使用 <code class="docutils literal notranslate"><span class="pre">ed25519-dalek</span></code> 或 <code class="docutils literal notranslate"><span class="pre">ed25519-salty</span></code> 特性的其中之一来启用验证，使用什么特性依赖于 <code class="docutils literal notranslate"><span class="pre">embassy-boot</span></code> crate。我们推荐 <code class="docutils literal notranslate"><span class="pre">ed25519-salty</span></code>，因为目前它占用闪存空间较小。</p>
@@ -289,6 +284,7 @@ tail<span class="w"> </span>-n1<span class="w"> </span><span class="nv">$SECRETS
 </pre></div>
 </div>
 <p>请记住，你要保护好密钥文件 <code class="docutils literal notranslate"><span class="pre">$SECRETS_DIR/key.sec</span></code>，否则其他人也能以你的身份对驱动签名。</p>
+</div>
 </div>
 
         </article>
@@ -336,8 +332,30 @@ tail<span class="w"> </span>-n1<span class="w"> </span><span class="nv">$SECRETS
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            目录
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">引导程序</a><ul>
+<li><a class="reference internal" href="#id2">硬件支持</a></li>
+<li><a class="reference internal" href="#id3">设计</a></li>
+<li><a class="reference internal" href="#firmwareupdater"><code class="docutils literal notranslate"><span class="pre">FirmwareUpdater</span></code></a></li>
+<li><a class="reference internal" href="#id4"><code class="docutils literal notranslate"><span class="pre">验证</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
