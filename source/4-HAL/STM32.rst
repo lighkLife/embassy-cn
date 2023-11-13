@@ -2,7 +2,7 @@
 Embassy STM32 硬件抽象层
 ==========================
 
-.. seealso:: https://embassy.dev/book/dev/stm32.html
+.. seealso:: 原文：https://embassy.dev/book/dev/stm32.html
 
 `Embassy_STM32_硬件抽象层 <https://github.com/embassy-rs/embassy/tree/master/embassy-stm32>`_ 建立于 ``stm32-metapac`` 基础之上。
 
