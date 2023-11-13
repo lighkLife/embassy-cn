@@ -7,7 +7,7 @@
    Basic-application
 
 
-原文：[https://embassy.dev/book/dev/getting_started.html](https://embassy.dev/book/dev/getting_started.html
+.. seealso:: 原文：[https://embassy.dev/book/dev/getting_started.html](https://embassy.dev/book/dev/getting_started.html
 
 已经迫不及待要上手了吗？稍等，要正式开始工作前，我们需要做一些准备。
 
@@ -32,11 +32,11 @@ nRF套件
 STM32套件
 ^^^^^^^^^^^
 
-- `STM32 Nucleo-144（STM32H743ZI MCU）<https://www.st.com/en/evaluation-tools/nucleo-h743zi.html>`_ 开发板
-- `STM32 Nucleo-144（STM32F429ZI MCU）<https://www.st.com/en/evaluation-tools/nucleo-f429zi.html>`_ 开发板
+- `STM32_Nucleo-144(STM32H743ZI MCU) <https://www.st.com/en/evaluation-tools/nucleo-h743zi.html>`_ 开发板
+- `STM32_Nucleo-144(STM32F429ZI MCU) <https://www.st.com/en/evaluation-tools/nucleo-f429zi.html>`_ 开发板
 - `STM32L4+ <https://www.st.com/en/evaluation-tools/b-l4s5i-iot01a.html>`_ loT开发套件,支持低功耗无线, BLE, NFC, WiFi
 - `STM32L0 <https://www.st.com/en/evaluation-tools/b-l072z-lrwan1.html>`_ 开发套件，支持LoRa, Sigfox, 低功耗无线
-- `STM32 Nculeo-64（STM32WL55JCI）<https://www.st.com/en/evaluation-tools/nucleo-wl55jc.html>`_ 开发版
+- `STM32_Nculeo-64(STM32WL55JCI) <https://www.st.com/en/evaluation-tools/nucleo-wl55jc.html>`_ 开发版
 - `STM32U5 <https://www.st.com/en/evaluation-tools/nucleo-wl55jc.html>`_ loT开发套件
 
 RP2040套件
@@ -49,8 +49,7 @@ RP2040套件
 
 首先从git仓库克隆代码到本地：
 
-.. code-block::console
-    :linenos:
+::
 
     git clone https://github.com/embassy-rs/embassy.git
     cd embassy
@@ -59,8 +58,7 @@ RP2040套件
 
 执行下列命令运行示例程序：
 
-.. code-block::console
-    :linenos:
+::
 
     cd examples/nrf
     cargo run --bin blinky --release

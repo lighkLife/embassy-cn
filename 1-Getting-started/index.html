@@ -224,7 +224,10 @@
 <li class="toctree-l1"><a class="reference internal" href="Basic-application.html">基本应用示例</a></li>
 </ul>
 </div>
+<div class="admonition seealso">
+<p class="admonition-title">参见</p>
 <p>原文：[<a class="reference external" href="https://embassy.dev/book/dev/getting_started.html](https://embassy.dev/book/dev/getting_started.html">https://embassy.dev/book/dev/getting_started.html](https://embassy.dev/book/dev/getting_started.html</a></p>
+</div>
 <p>已经迫不及待要上手了吗？稍等，要正式开始工作前，我们需要做一些准备。</p>
 <p>在您的开发环境中，需要确保以下软件已正确安装：</p>
 <ul class="simple">
@@ -245,11 +248,11 @@
 <div class="section" id="stm32">
 <h3>STM32套件<a class="headerlink" href="#stm32" title="永久链接至标题">#</a></h3>
 <ul class="simple">
-<li><p><a href="#id7"><span class="problematic" id="id8">`STM32 Nucleo-144（STM32H743ZI MCU）&lt;https://www.st.com/en/evaluation-tools/nucleo-h743zi.html&gt;`_</span></a> 开发板</p></li>
-<li><p><a href="#id9"><span class="problematic" id="id10">`STM32 Nucleo-144（STM32F429ZI MCU）&lt;https://www.st.com/en/evaluation-tools/nucleo-f429zi.html&gt;`_</span></a> 开发板</p></li>
+<li><p><a class="reference external" href="https://www.st.com/en/evaluation-tools/nucleo-h743zi.html">STM32_Nucleo-144(STM32H743ZI MCU)</a> 开发板</p></li>
+<li><p><a class="reference external" href="https://www.st.com/en/evaluation-tools/nucleo-f429zi.html">STM32_Nucleo-144(STM32F429ZI MCU)</a> 开发板</p></li>
 <li><p><a class="reference external" href="https://www.st.com/en/evaluation-tools/b-l4s5i-iot01a.html">STM32L4+</a> loT开发套件,支持低功耗无线, BLE, NFC, WiFi</p></li>
 <li><p><a class="reference external" href="https://www.st.com/en/evaluation-tools/b-l072z-lrwan1.html">STM32L0</a> 开发套件，支持LoRa, Sigfox, 低功耗无线</p></li>
-<li><p><a href="#id11"><span class="problematic" id="id12">`STM32 Nculeo-64（STM32WL55JCI）&lt;https://www.st.com/en/evaluation-tools/nucleo-wl55jc.html&gt;`_</span></a> 开发版</p></li>
+<li><p><a class="reference external" href="https://www.st.com/en/evaluation-tools/nucleo-wl55jc.html">STM32_Nculeo-64(STM32WL55JCI)</a> 开发版</p></li>
 <li><p><a class="reference external" href="https://www.st.com/en/evaluation-tools/nucleo-wl55jc.html">STM32U5</a> loT开发套件</p></li>
 </ul>
 </div>
@@ -263,7 +266,16 @@
 <div class="section" id="id3">
 <h2>运行实例<a class="headerlink" href="#id3" title="永久链接至标题">#</a></h2>
 <p>首先从git仓库克隆代码到本地：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">embassy</span><span class="o">-</span><span class="n">rs</span><span class="o">/</span><span class="n">embassy</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">embassy</span>
+<span class="n">git</span> <span class="n">submodule</span> <span class="n">update</span> <span class="o">--</span><span class="n">init</span>
+</pre></div>
+</div>
 <p>执行下列命令运行示例程序：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">examples</span><span class="o">/</span><span class="n">nrf</span>
+<span class="n">cargo</span> <span class="n">run</span> <span class="o">--</span><span class="nb">bin</span> <span class="n">blinky</span> <span class="o">--</span><span class="n">release</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="id4">
 <h2>下一章节内容预告<a class="headerlink" href="#id4" title="永久链接至标题">#</a></h2>
