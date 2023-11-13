@@ -1,5 +1,7 @@
 # Embassy
 
+原文：[https://embassy.dev/book/dev/index.html](https://embassy.dev/book/dev/index.html)
+
 在嵌入式开发中，Embassy项目的目标是让`async/await`成为首选的实现方式。
 
 ## 什么是异步？

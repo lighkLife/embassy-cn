@@ -1,5 +1,6 @@
-
 # 基本应用示例
+
+原文：[https://embassy.dev/book/dev/basic_application.html](https://embassy.dev/book/dev/basic_application.html)
 
 我们已经正常运行了一个[示例程序](https://embassy.dev/dev/examples.html)。接下来，我们通过一个运行在nRF52套件环境下的Embassy程序来更深入地了解它。
 
