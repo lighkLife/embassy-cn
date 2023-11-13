@@ -7,7 +7,7 @@
    Basic-application
 
 
-.. seealso:: 原文：[https://embassy.dev/book/dev/getting_started.html](https://embassy.dev/book/dev/getting_started.html
+.. seealso:: 原文：https://embassy.dev/book/dev/getting_started.html
 
 已经迫不及待要上手了吗？稍等，要正式开始工作前，我们需要做一些准备。
 
