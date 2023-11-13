@@ -156,11 +156,11 @@
   <ul class="current">
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Embassy</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../1-Getting-started/index.html">快速开始</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../1-Getting-started/Basic-application.html">A basic Embassy application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1-Getting-started/Basic-application.html">基本应用示例</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../2-Bare-metal-to-async/index.html">在裸机上异步</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../2-Bare-metal-to-async/Bare-metal-to-async.html">From bare metal to async Rust</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2-Bare-metal-to-async/Bare-metal-to-async.html">从裸机到异步Rust</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../3-Executor/index.html">执行器 Executor</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -219,45 +219,44 @@
         <article role="main">
           <div class="section" id="embassy">
 <h1>Embassy<a class="headerlink" href="#embassy" title="永久链接至标题">#</a></h1>
-<p>Embassy is a project to make async/await a first-class option for embedded development.</p>
-<div class="section" id="what-is-async">
-<h2>What is async?<a class="headerlink" href="#what-is-async" title="永久链接至标题">#</a></h2>
-<p>When handling I/O, software must call functions that block program execution until the I/O operation completes. When running inside of an OS such as Linux, such functions generally transfer control to the kernel so that another task, known as a thread, can be executed if available, or the CPU can be put to sleep until another such task is ready to perform more work. Because an OS cannot presume that threads will behave cooperatively, threads are relatively resource-intensive, and may be forcibly interrupted they do not transfer control back to the kernel within an allotted time. But if tasks could be presumed to behave cooperatively, or at least not maliciously, it would be possible to create tasks that appear to be almost free when compared to a traditional OS thread. In Rust, these lightweight tasks, known as ‘coroutines’ or ‘goroutines’ in other languages, are implemented with async.</p>
-<p>Async-await works by transforming each async function into an object called a future. When a future blocks on I/O the future yields, and the scheduler, called an executor, can select a different future to execute. Compared to alternatives such as an RTOS, async can yield better performance and lower power consumption because the executor doesn’t have to guess when a future is ready to execute. However, program size may be higher than other alternatives, which may be a problem for certain space-constrained devices with very low memory. On the devices Embassy supports, such as stm32 and nrf, memory is generally large enough to accommodate the modestly-increased program size.</p>
+<p>在嵌入式开发中，Embassy项目的目标是让<code class="docutils literal notranslate"><span class="pre">async/await</span></code>成为首选的实现方式。</p>
+<div class="section" id="id1">
+<h2>什么是异步？<a class="headerlink" href="#id1" title="永久链接至标题">#</a></h2>
+<p>在执行I/O操作时，程序会在调用I/O相关操作的功能处阻塞，直到I/O操作完成。在比如Linux这样的操作系统环境中，这样的功能一般会交给操作系统内核来控制，使得其他任务，通常是另一个线程，能够得到执行，或者是CPU进入睡眠模式直到有任务进入可执行状态。操作系统不能假设线程会主动协作，线程相对来说需要较多的资源，在分配的时间内，如果线程没有将控制权交还给内核，就可能会被强制中断。但如果假设任务会主动协作，或者至少不是恶意抢占资源，那么与传统操作系统线程相比，创建线程的资源消耗就可能达到几乎可以忽略不计的程度。这种被某些编程语言称之为协程或<em>goroutines</em>(Go语言)的轻量任务，在Rust中使用异步来实现。</p>
+<p>在Rust中，非阻塞操作可以通过async/await来实现。Async-wait将async函数传入一个叫做future的对象，当future对象被I/O操作阻塞时，调度器(通常称为执行器，executor)将选择其他future对象来执行。执行器不需要检测future对象什么时候能执行，所以相对RTOS等方案而言，async有更好的切换性能和更低的消耗，但程序大小通常会比非异步程序更大。这在资源有限，比如内存很少的设备环境中可能是个问题。在Embassy支持的设备，比如stm32和nrf中，内存通常足以容纳规模适度的程序运行。</p>
 </div>
-<div class="section" id="what-is-embassy">
-<h2>What is Embassy?<a class="headerlink" href="#what-is-embassy" title="永久链接至标题">#</a></h2>
-<p>The Embassy project consists of several crates that you can use together or independently:</p>
+<div class="section" id="id2">
+<h2>Embassy是什么？<a class="headerlink" href="#id2" title="永久链接至标题">#</a></h2>
+<p>Embassy项目包含以下crate，它们可以自由组合使用，没有任何限制。</p>
 <ul class="simple">
-<li><p><strong>Executor</strong> - The <a class="reference external" href="https://docs.embassy.dev/embassy-executor/">embassy-executor</a> is an async/await executor that generally executes a fixed number of tasks, allocated at startup, though more can be added later. The HAL is an API that you can use to access peripherals, such as USART, UART, I2C, SPI, CAN, and USB. Embassy provides implementations of both async and blocking APIs where it makes sense. DMA (Direct Memory Access) is an example where async is a good fit, whereas GPIO states are a better fit for a blocking API. The executor may also provide a system timer that you can use for both async and blocking delays. For less than one microsecond, blocking delays should be used because the cost of context-switching is too high and the executor will be unable to provide accurate timing.</p></li>
-<li><p><strong>Hardware Abstraction Layers</strong> - HALs implement safe, idiomatic Rust APIs to use the hardware capabilities, so raw register manipulation is not needed. The Embassy project maintains HALs for select hardware, but you can still use HALs from other projects with Embassy.</p>
+<li><p><strong>执行器</strong> <a class="reference external" href="https://docs.embassy.dev/embassy-executor/">embassy-executor</a>是一个异步执行器。它在启动时分配固定的任务数，同时允许后续添加。对于支持硬件抽象层（HAL）的硬件，比如USART, UART, I2C, SPI, CAN, 和USB等，Embassy同时提供了支持同步和异步的版本。像直接内存访问（DMA）这样的场景适合使用异步接口，GPIO则更适合使用同步接口。执行器还提供了定时器功能，可以方便地实现同步或异步的延迟。对于小于一微秒的延迟要求，建议使用阻塞延迟，因为上下文切换的成本太高，执行器将无法提供准确的定时。</p></li>
+<li><p><strong>硬件抽象层（HAL）</strong> HAL提供了安全易用的接口来操作硬件，不需要操作原始寄存器。Embassy维护了下列硬件的HAL，但它并不局限于此，您可以在任何使用Embassy的项目中使用HAL。</p>
 <ul>
-<li><p><a class="reference external" href="https://docs.embassy.dev/embassy-stm32/">embassy-stm32</a>, for all STM32 microcontroller families.</p></li>
-<li><p><a class="reference external" href="https://docs.embassy.dev/embassy-nrf/">embassy-nrf</a>, for the Nordic Semiconductor nRF52, nRF53, nRF91 series.</p></li>
-<li><p><a class="reference external" href="https://docs.embassy.dev/embassy-rp/">embassy-rp</a>, for the Raspberry Pi RP2040 microcontroller.</p></li>
-<li><p><a class="reference external" href="https://github.com/esp-rs">esp-rs</a>, for the Espressif Systems ESP32 series of chips.</p></li>
+<li><p><a class="reference external" href="https://docs.embassy.dev/embassy-stm32/">embassy-stm32</a> 支持STM32微控制器系列</p></li>
+<li><p><a class="reference external" href="https://docs.embassy.dev/embassy-nrf/">emmbassy-nrf</a> 支持北欧半导体公司(the Nordic Semiconducotr)的nRF52、nRF53、nRF91系列</p></li>
+<li><p><a class="reference external" href="https://docs.embassy.dev/embassy-rp/">embassy-rp</a>, 支持树莓派RP2040。</p></li>
+<li><p><a class="reference external" href="https://github.com/esp-rs">esp-rs</a>, Espressif Systems ESP32系列芯片</p></li>
 </ul>
 </li>
 </ul>
 <blockquote>
-<div><p><strong>Note</strong> <br>
-A common question is if one can use the Embassy HALs standalone. Yes, it is possible! There are no dependency on the executor within the HALs. You can even use them without async, as they implement both the <a class="reference external" href="https://github.com/rust-embedded/embedded-hal">Embedded HAL</a> blocking and async traits. |</p>
+<div><p><strong>注意</strong><br />有很多人关心是否可以单独使用Embassy硬件抽象层（Embassy HALs）？答案当然是可以! Embassy硬件抽象层并不依赖执行器，甚至可以在没有异步的情况下使用它们，它们实现了<a class="reference external" href="https://github.com/rust-embedded/embedded-hal">Embedded HAL</a>阻塞和异步特性。|</p>
 </div></blockquote>
 <ul class="simple">
-<li><p><strong>Networking</strong> - The <a class="reference external" href="https://docs.embassy.dev/embassy-net/">embassy-net</a> network stack implements extensive networking functionality, including Ethernet, IP, TCP, UDP, ICMP and DHCP. Async drastically simplifies managing timeouts and serving multiple connections concurrently. Several drivers for WiFi and Ethernet chips can be found.</p></li>
-<li><p><strong>Bluetooth</strong> - The <a class="reference external" href="https://github.com/embassy-rs/nrf-softdevice">nrf-softdevice</a> crate provides Bluetooth Low Energy 4.x and 5.x support for nRF52 microcontrollers.</p></li>
-<li><p><strong>LoRa</strong> - <a class="reference external" href="https://github.com/embassy-rs/lora-phy">lora-phy</a> and <a class="reference external" href="https://docs.embassy.dev/embassy-lora/">embassy-lora</a> supports LoRa networking on a wide range of LoRa radios, fully integrated with a Rust <a class="reference external" href="https://github.com/ivajloip/rust-lorawan">LoRaWAN</a> implementation.</p></li>
-<li><p><strong>USB</strong> - <a class="reference external" href="https://docs.embassy.dev/embassy-usb/">embassy-usb</a> implements a device-side USB stack. Implementations for common classes such as USB serial (CDC ACM) and USB HID are available, and a rich builder API allows building your own.</p></li>
-<li><p><strong>Bootloader and DFU</strong> - <a class="reference external" href="https://github.com/embassy-rs/embassy/tree/master/embassy-boot">embassy-boot</a> is a lightweight bootloader supporting firmware application upgrades in a power-fail-safe way, with trial boots and rollbacks.</p></li>
+<li><p><strong>网络</strong> <a class="reference external" href="https://docs.embassy.dev/embassy-net/">embassy-net</a>实现了常用的网络功能，包括以太网、IP、TCP、UDP、ICMP和DHCP。在管理超时和同时为多个连接提供服务方面，Async做了高度简化，提供了很大的便利。</p></li>
+<li><p><strong>蓝牙</strong> <a class="reference external" href="https://github.com/embassy-rs/nrf-softdevice">nrf-softdevice</a>为nRF52微控制器提供蓝牙低能耗4.x和5.x支持。</p></li>
+<li><p><strong>LoRa</strong> <a class="reference external" href="https://docs.embassy.dev/embassy-lora/">embassy-lora</a>支持STM32WL无线微控制器和Semtech SX127x收发器上的LoRa网络。</p></li>
+<li><p><strong>USB</strong> <a class="reference external" href="https://docs.embassy.dev/embassy-usb/">embassy-usb</a>实现了设备侧的USB堆栈。实现了通用类（如USB串行（CDC ACM），支持USB HID，并且提供丰富的构建器API方便构建您自己的实现。</p></li>
+<li><p><strong>Bootloader和DFU</strong> <a class="reference external" href="https://github.com/embassy-rs/embassy/tree/master/embassy-boot">embassy-boot</a>是一个轻量级的启动器，它支持固件加载，支持以电源故障安全的方式升级固件，支持试用引导和回滚。</p></li>
 </ul>
 </div>
-<div class="section" id="resources">
-<h2>Resources<a class="headerlink" href="#resources" title="永久链接至标题">#</a></h2>
-<p>For more reading material on async Rust and Embassy:</p>
+<div class="section" id="id3">
+<h2>相关资源<a class="headerlink" href="#id3" title="永久链接至标题">#</a></h2>
+<p>关于异步Rust和Embassy的更多资料:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://tweedegolf.nl/en/blog/65/async-rust-vs-rtos-showdown">Comparsion of FreeRTOS and Embassy</a></p></li>
-<li><p><a class="reference external" href="https://dev.to/apollolabsbin/series/20707">Tutorials</a></p></li>
-<li><p><a class="reference external" href="https://blog.drogue.io/firmware-updates-part-1/">Firmware Updates with Embassy</a></p></li>
+<li><p><a class="reference external" href="https://tweedegolf.nl/en/blog/65/async-rust-vs-rtos-showdown">对比FreeRTOS和Embassy</a></p></li>
+<li><p><a class="reference external" href="https://dev.to/apollolabsbin/series/20707">Embassy应用实例</a></p></li>
+<li><p><a class="reference external" href="https://blog.drogue.io/firmware-updates-part-1/">通过Embassy升级固件</a></p></li>
 </ul>
 </div>
 </div>
@@ -320,9 +319,9 @@ A common question is if one can use the Embassy HALs standalone. Yes, it is poss
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Embassy</a><ul>
-<li><a class="reference internal" href="#what-is-async">What is async?</a></li>
-<li><a class="reference internal" href="#what-is-embassy">What is Embassy?</a></li>
-<li><a class="reference internal" href="#resources">Resources</a></li>
+<li><a class="reference internal" href="#id1">什么是异步？</a></li>
+<li><a class="reference internal" href="#id2">Embassy是什么？</a></li>
+<li><a class="reference internal" href="#id3">相关资源</a></li>
 </ul>
 </li>
 </ul>

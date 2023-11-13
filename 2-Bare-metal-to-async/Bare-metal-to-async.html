@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="执行器 Executor" href="../3-Executor/index.html" /><link rel="prev" title="在裸机上异步" href="index.html" />
 
     <meta name="generator" content="sphinx-4.3.2, furo 2022.06.21"/>
-        <title>From bare metal to async Rust - embassy-cn 0.1.0 文档</title>
+        <title>从裸机到异步Rust - embassy-cn 0.1.0 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -156,11 +156,11 @@
   <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../0-Embassy/Embassy.html">Embassy</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../1-Getting-started/index.html">快速开始</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../1-Getting-started/Basic-application.html">A basic Embassy application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1-Getting-started/Basic-application.html">基本应用示例</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">在裸机上异步</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">From bare metal to async Rust</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">从裸机到异步Rust</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../3-Executor/index.html">执行器 Executor</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -217,16 +217,16 @@
           </label>
         </div>
         <article role="main">
-          <div class="section" id="from-bare-metal-to-async-rust">
-<h1>From bare metal to async Rust<a class="headerlink" href="#from-bare-metal-to-async-rust" title="永久链接至标题">#</a></h1>
-<p>If you’re new to Embassy, it can be overwhelming to grasp all the terminology and concepts. This guide aims to clarify the different layers in Embassy, which problem each layer solves for the application writer.</p>
-<p>This guide uses the STM32 IOT01A board, but should be easy to translate to any STM32 chip. For nRF, the PAC itself is not maintained within the Embassy project, but the concepts and the layers are similar.</p>
-<p>The application we’ll write is a simple ‘push button, blink led’ application, which is great for illustrating input and output handling for each of the examples we’ll go through. We’ll start at the Peripheral Access Crate (PAC) example and end at the async example.</p>
-<div class="section" id="pac-version">
-<h2>PAC version<a class="headerlink" href="#pac-version" title="永久链接至标题">#</a></h2>
-<p>The PAC is the lowest API for accessing peripherals and registers, if you don’t count reading/writing directly to memory addresses. It provides distinct types to make accessing peripheral registers easier, but it does not prevent you from writing unsafe code.</p>
-<p>Writing an application using the PAC directly is therefore not recommended, but if the functionality you want to use is not exposed in the upper layers, that’s what you need to use.</p>
-<p>The blinky app using PAC is shown below:</p>
+          <div class="section" id="rust">
+<h1>从裸机到异步Rust<a class="headerlink" href="#rust" title="永久链接至标题">#</a></h1>
+<p>作为Embassy新手，可能会觉得所有的术语和概念都很难理解。本章旨在阐明Embassy中的不同层次，以及每一层次为应用程序编写者解决的问题。</p>
+<p>本例中使用的是STM32 IOT01A开发板，很容易转换为任何STM32芯片。对于nRF，它的PAC本身并未在Embassy项目中维护，但概念和层次结构是类似的。</p>
+<p>我们将编写的应用程序非常简单，它实现的功能仅仅是：按下按钮，让LED闪烁。它的输入输出处理非常典型，对于后续要讨论的所有示例都非常有参考价值。我们将从外设访问包(PAC)示例开始，异步示例结束。</p>
+<div class="section" id="pac">
+<h2>PAC版本<a class="headerlink" href="#pac" title="永久链接至标题">#</a></h2>
+<p>如果不直接从内存读取的话，PAC（Peripheral Access Crate，外设访问包）是访问外设和寄存器的最底层API。它提供了不同的类型来使访问外设寄存器更容易，但它并不能阻止你编写不安全的代码。</p>
+<p>因此，直接使用PAC编写应用程序并不推荐，建议仅在上层没有暴露您想使用的接口时使用。</p>
+<p>使用PAC的示例程序如下：</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="cp">#![no_std]</span>
 <span class="cp">#![no_main]</span>
 
@@ -282,18 +282,18 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>As you can see, a lot of code is needed to enable the peripheral clocks and to configure the input pins and the output pins of the application.</p>
-<p>Another downside of this application is that it is busy-looping while polling the button state. This prevents the microcontroller from utilizing any sleep mode to save power.</p>
+<p>正如你所看到的，PAC层次的抽象中，启用外设时钟，配置应用程序的输入引脚和输出引脚，都需要大量的代码。</p>
+<p>它的另一个缺点是：在轮询按钮状态时会忙等待。这阻止了微控制器利用睡眠模式来节省能源。</p>
 </div>
-<div class="section" id="hal-version">
-<h2>HAL version<a class="headerlink" href="#hal-version" title="永久链接至标题">#</a></h2>
-<p>To simplify our application, we can use the HAL instead. The HAL exposes higher level APIs that handle details such as:</p>
+<div class="section" id="hal">
+<h2>HAL版本<a class="headerlink" href="#hal" title="永久链接至标题">#</a></h2>
+<p>为了简化我们的应用程序，我们可以选择使用HAL（硬件抽象层）。HAL提供了更高级别的API抽象，它可以处理以下细节：</p>
 <ul class="simple">
-<li><p>Automatically enabling the peripheral clock when you’re using the peripheral</p></li>
-<li><p>Deriving and applying register configuration from higher level types</p></li>
-<li><p>Implementing the embedded-hal traits to make peripherals useful in third party drivers</p></li>
+<li><p>使用外设时，自动启用外设时钟</p></li>
+<li><p>在更高层次的类型中派生并应用寄存器配置</p></li>
+<li><p>实现嵌入式硬件抽象层(embedded-hal)特性，使外设能用于第三方驱动程序</p></li>
 </ul>
-<p>The HAL example is shown below:</p>
+<p>下面是采用HAL的示例程序：</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="cp">#![no_std]</span>
 <span class="cp">#![no_main]</span>
 
@@ -317,14 +317,14 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>As you can see, the application becomes a lot simpler, even without using any async code. The <code class="docutils literal notranslate"><span class="pre">Input</span></code> and <code class="docutils literal notranslate"><span class="pre">Output</span></code> types hide all the details of accessing the GPIO registers and allow you to use a much simpler API for querying the state of the button and toggling the LED output.</p>
-<p>The same downside from the PAC example still applies though: the application is busy looping and consuming more power than necessary.</p>
+<p>正如你所看到的，即使没有使用任何异步代码，应用程序也变得简单了很多。输入和输出类型隐藏了访问GPIO寄存器的所有细节，并允许你使用更简单的API来查询按钮的状态和切换LED输出。</p>
+<p>然而，PAC示例中的缺点在这里仍然存在：应用程序在忙等待，消耗的能源比必要的多。</p>
 </div>
-<div class="section" id="interrupt-driven">
-<h2>Interrupt driven<a class="headerlink" href="#interrupt-driven" title="永久链接至标题">#</a></h2>
-<p>To save power, we need to configure the application so that it can be notified when the button is pressed using an interrupt.</p>
-<p>Once the interrupt is configured, the application can instruct the microcontroller to enter a sleep mode, consuming very little power.</p>
-<p>Given Embassy focus on async Rust (which we’ll come back to after this example), the example application must use a combination of the HAL and PAC in order to use interrupts. For this reason, the application also contains some helper functions to access the PAC (not shown below).</p>
+<div class="section" id="id1">
+<h2>中断驱动<a class="headerlink" href="#id1" title="永久链接至标题">#</a></h2>
+<p>为了节约能源，需要支持处理器睡眠，需要通过配置应用程序，使其能够在按钮被按下时通过中断得到通知时才执行相关任务。</p>
+<p>一旦配置了中断，应用程序就可以指示微控制器进入睡眠模式，消耗的能源显著减少。</p>
+<p>考虑到Embassy的关注重点是异步Rust（我们将在本示例之后回到这个问题），示例应用程序必须使用HAL和PAC的组合才能使用中断。因此，应用程序还包含一些访问PAC的辅助函数（下面没有列出）。</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="cp">#![no_std]</span>
 <span class="cp">#![no_main]</span>
 
@@ -384,13 +384,13 @@
 <span class="c1">//</span>
 </pre></div>
 </div>
-<p>The simple application is now more complex again, primarily because of the need to keep the button and LED states in the global scope where it is accessible by the main application loop, as well as the interrupt handler.</p>
-<p>To do that, the types must be guarded by a mutex, and interrupts must be disabled whenever we are accessing this global state to gain access to the peripherals.</p>
-<p>Luckily, there is an elegant solution to this problem when using Embassy.</p>
+<p>简单的程序变得越来越复杂，主要是我们需要在全局范围内保存按钮和LED的状态，以便于主应用循环能像中断一样访问到它们。</p>
+<p>要做到这一点，类型必须用锁来保护，并且当我们通过全局状态获得了外设的访问权限期间，中断必须被暂时屏蔽。</p>
+<p>幸运的是，在Embassy中，有一种很优雅的方式来解决这个问题。</p>
 </div>
-<div class="section" id="async-version">
-<h2>Async version<a class="headerlink" href="#async-version" title="永久链接至标题">#</a></h2>
-<p>It’s time to use the Embassy capabilities to its fullest. At the core, Embassy has an async excecutor, or a runtime for async tasks if you will. The executor polls a set of tasks (defined at compile time), and whenever a task <code class="docutils literal notranslate"><span class="pre">blocks</span></code>, the executor will run another task, or put the microcontroller to sleep.</p>
+<div class="section" id="id2">
+<h2>异步版本<a class="headerlink" href="#id2" title="永久链接至标题">#</a></h2>
+<p>现在是时候充分利用Embassy的功能了。最核心的内容是，Embassy有一个异步执行器，或者你可以理解为异步任务的运行时，执行器轮询一组任务（在编译时定义），每当一个任务被阻塞时，<code class="docutils literal notranslate"><span class="pre">执行器</span></code>将运行另一个任务，或者让微控制器进入睡眠状态。</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="cp">#![no_std]</span>
 <span class="cp">#![no_main]</span>
 <span class="cp">#![feature(type_alias_impl_trait)]</span>
@@ -417,18 +417,18 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>The async version looks very similar to the HAL version, apart from a few minor details:</p>
+<p>异步版本看起来与HAL版本非常相似，除了一些小细节：</p>
 <ul class="simple">
-<li><p>The main entry point is annotated with a different macro and has an async type signature. This macro creates and starts an Embassy runtime instance and launches the main application task. Using the <code class="docutils literal notranslate"><span class="pre">Spawner</span></code> instance, the application may spawn other tasks.</p></li>
-<li><p>The peripheral initialization is done by the main macro, and is handed to the main task.</p></li>
-<li><p>Before checking the button state, the application is awaiting a transition in the pin state (low → high or high → low).</p></li>
+<li><p>主入口点用不同的宏进行注释，并具有异步类型签名。此宏创建并启动Embassy运行时实例，并启动主应用程序任务。应用程序可以使用Spawner实例生成其他任务。</p></li>
+<li><p>外设初始化由main宏完成，并传递到主任务中。</p></li>
+<li><p>在检查按钮状态之前，应用程序会一直等待引脚状态的转换（ 低→高 或 高→低 ）。</p></li>
 </ul>
-<p>When <code class="docutils literal notranslate"><span class="pre">button.await_for_any_edge().await</span></code> is called, the executor will pause the main task and put the microcontroller in sleep mode, unless there are other tasks that can run. Internally, the Embassy HAL has configured the interrupt handler for the button (in <code class="docutils literal notranslate"><span class="pre">ExtiButton</span></code>), so that whenever an interrupt is raised, the task awaiting the button will be woken up.</p>
-<p>The minimal overhead of the executor and the ability to run multiple tasks “concurrently” combined with the enormous simplification of the application, makes <code class="docutils literal notranslate"><span class="pre">async</span></code> a great fit for embedded.</p>
+<p>当<code class="docutils literal notranslate"><span class="pre">button.await_for_any_edge().await</span></code>被调用，如果没有其他任务可以执行，微控制器会暂停主任务并进入睡眠状态。Embassy HAL配置了按钮（在<code class="docutils literal notranslate"><span class="pre">ExtiButton</span></code>中）的中断处理程序，当中断发生时，等待按钮的任务都将被唤醒。</p>
+<p>执行器的开销最小化、“并发”执行多个任务、极大简化应用程序等特点，让<code class="docutils literal notranslate"><span class="pre">异步</span></code>非常适用于嵌入式开发。</p>
 </div>
-<div class="section" id="summary">
-<h2>Summary<a class="headerlink" href="#summary" title="永久链接至标题">#</a></h2>
-<p>We have seen how the same application can be written at the different abstraction levels in Embassy. First starting out at the PAC level, then using the HAL, then using interrupts, and then using interrupts indirectly using async Rust.</p>
+<div class="section" id="id3">
+<h2>总结<a class="headerlink" href="#id3" title="永久链接至标题">#</a></h2>
+<p>本章我们讲述了在不同的抽象层次中，如何用Embassy实现相同的应用程序。我们从PAC层次开始，然后是HAL，再是使用中断，最后是通过异步间接使用中断。</p>
 </div>
 </div>
 
@@ -489,12 +489,12 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">From bare metal to async Rust</a><ul>
-<li><a class="reference internal" href="#pac-version">PAC version</a></li>
-<li><a class="reference internal" href="#hal-version">HAL version</a></li>
-<li><a class="reference internal" href="#interrupt-driven">Interrupt driven</a></li>
-<li><a class="reference internal" href="#async-version">Async version</a></li>
-<li><a class="reference internal" href="#summary">Summary</a></li>
+<li><a class="reference internal" href="#">从裸机到异步Rust</a><ul>
+<li><a class="reference internal" href="#pac">PAC版本</a></li>
+<li><a class="reference internal" href="#hal">HAL版本</a></li>
+<li><a class="reference internal" href="#id1">中断驱动</a></li>
+<li><a class="reference internal" href="#id2">异步版本</a></li>
+<li><a class="reference internal" href="#id3">总结</a></li>
 </ul>
 </li>
 </ul>

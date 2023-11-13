@@ -2,10 +2,10 @@
 <html class="no-js" lang="zh_CN">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="引导程序" href="Bootloader.html" /><link rel="prev" title="Embassy STM32 HAL" href="../4-HAL/STM32.html" />
+    <meta name="color-scheme" content="light dark"><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" />
 
     <meta name="generator" content="sphinx-4.3.2, furo 2022.06.21"/>
-        <title>引导程序 - embassy-cn 0.1.0 文档</title>
+        <title>环境准备 - embassy-cn 0.1.0 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -133,7 +133,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -153,10 +153,10 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <ul class="current">
+  <ul>
 <li class="toctree-l1"><a class="reference internal" href="../0-Embassy/Embassy.html">Embassy</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../1-Getting-started/index.html">快速开始</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../1-Getting-started/Basic-application.html">基本应用示例</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="index.html">快速开始</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="Basic-application.html">基本应用示例</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../2-Bare-metal-to-async/index.html">在裸机上异步</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -172,8 +172,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../4-HAL/STM32.html">Embassy STM32 HAL</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">引导程序</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="Bootloader.html">引导程序</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../5-Bootloader/index.html">引导程序</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../5-Bootloader/Bootloader.html">引导程序</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../6-Examples/index.html">例子</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -211,17 +211,70 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
           <div class="section" id="id1">
-<h1>引导程序<a class="headerlink" href="#id1" title="永久链接至标题">#</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="Bootloader.html">引导程序</a></li>
+<h1>环境准备<a class="headerlink" href="#id1" title="永久链接至标题">#</a></h1>
+<p>已经迫不及待要开工了吗？稍等，要正式开始工作前，我们需要做一些准备。</p>
+<p>在您的开发环境中，需要确保以下软件已正确安装：</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://rustup.rs/">rustup</a> Rust工具链，参考官方链接或各发行版的安装文档</p></li>
+<li><p><a class="reference external" href="https://crates.io/crates/probe-run">probe-run</a> 一款固件写入工具，在将固件写入设备时需要。您也可以使用其他工具来做同样的事情，比如<code class="docutils literal notranslate"><span class="pre">OpenOCD</span></code>。</p></li>
+</ul>
+<p>不用担心没有已支持的开发板，您可以在PC上，通过使用<code class="docutils literal notranslate"><span class="pre">std</span></code>来运行Embbassy应用。</p>
+<div class="section" id="id2">
+<h2>支持的型号<a class="headerlink" href="#id2" title="永久链接至标题">#</a></h2>
+<p>Embassy支持很多型号的微控制器，不过最容易的方式就是拥有一块更常见的开发板套件。</p>
+<div class="section" id="nrf">
+<h3>nRF套件<a class="headerlink" href="#nrf" title="永久链接至标题">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.nordicsemi.com/Products/Development-hardware/nrf52-dk">nRF52 Dk</a></p></li>
+<li><p><a class="reference external" href="https://www.nordicsemi.com/Products/Development-hardware/nRF9160-DK">nRF9160 DK</a></p></li>
+</ul>
+</div>
+<div class="section" id="stm32">
+<h3>STM32套件<a class="headerlink" href="#stm32" title="永久链接至标题">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.st.com/en/evaluation-tools/nucleo-h743zi.html">STM32 Nucleo-144（STM32H743ZI MCU）</a>开发板</p></li>
+<li><p><a class="reference external" href="https://www.st.com/en/evaluation-tools/nucleo-f429zi.html">STM32 Nucleo-144（STM32F429ZI MCU）</a>开发板</p></li>
+<li><p><a class="reference external" href="https://www.st.com/en/evaluation-tools/b-l4s5i-iot01a.html">STM32L4+</a> loT开发套件,支持低功耗无线, BLE, NFC, WiFi</p></li>
+<li><p><a class="reference external" href="https://www.st.com/en/evaluation-tools/b-l072z-lrwan1.html">STM32L0</a> 开发套件，支持LoRa, Sigfox, 低功耗无线</p></li>
+<li><p><a class="reference external" href="https://www.st.com/en/evaluation-tools/nucleo-wl55jc.html">STM32 Nculeo-64（STM32WL55JCI）</a>开发版</p></li>
+<li><p><a class="reference external" href="https://www.st.com/en/evaluation-tools/nucleo-wl55jc.html">STM32U5</a> loT开发套件</p></li>
+</ul>
+</div>
+<div class="section" id="rp2040">
+<h3>RP2040套件<a class="headerlink" href="#rp2040" title="永久链接至标题">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.raspberrypi.com/products/raspberry-pi-pico/">树莓派Pico</a></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>运行实例<a class="headerlink" href="#id3" title="永久链接至标题">#</a></h2>
+<p>首先从git仓库克隆代码到本地：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/embassy-rs/embassy.git
+<span class="nb">cd</span><span class="w"> </span>embassy
+git<span class="w"> </span>submodule<span class="w"> </span>update<span class="w"> </span>--init
+</pre></div>
+</div>
+<p>执行下列命令运行示例程序：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>examples/nrf
+cargo<span class="w"> </span>run<span class="w"> </span>--bin<span class="w"> </span>blinky<span class="w"> </span>--release
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>下一章节内容预告<a class="headerlink" href="#id4" title="永久链接至标题">#</a></h2>
+<p>恭喜，您已经成功运行了第一个Embassy应用程序！接下来您可以：</p>
+<ul class="simple">
+<li><p>了解<a class="reference external" href="https://embassy.dev/dev/runtime.html">执行器</a>的更多细节</p></li>
+<li><p>了解<a class="reference external" href="https://embassy.dev/dev/hal.html">HAL</a>的更多细节</p></li>
+<li><p>开始<a class="reference external" href="https://embassy.dev/dev/basic_application.html">编写自己的应用程序</a></p></li>
 </ul>
 </div>
 </div>
@@ -231,26 +284,8 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="Bootloader.html">
-              <div class="page-info">
-                <div class="context">
-                  <span>Next</span>
-                </div>
-                <div class="title">引导程序</div>
-              </div>
-              <svg><use href="#svg-arrow-right"></use></svg>
-            </a>
-          <a class="prev-page" href="../4-HAL/STM32.html">
-              <svg><use href="#svg-arrow-right"></use></svg>
-              <div class="page-info">
-                <div class="context">
-                  <span>Previous</span>
-                </div>
-                
-                <div class="title">Embassy STM32 HAL</div>
-                
-              </div>
-            </a>
+          
+          
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -271,8 +306,34 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            目录
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">环境准备</a><ul>
+<li><a class="reference internal" href="#id2">支持的型号</a><ul>
+<li><a class="reference internal" href="#nrf">nRF套件</a></li>
+<li><a class="reference internal" href="#stm32">STM32套件</a></li>
+<li><a class="reference internal" href="#rp2040">RP2040套件</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id3">运行实例</a></li>
+<li><a class="reference internal" href="#id4">下一章节内容预告</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
