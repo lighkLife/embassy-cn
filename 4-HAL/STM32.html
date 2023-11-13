@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="引导程序" href="../5-Bootloader/index.html" /><link rel="prev" title="Embassy nRF HAL" href="nRF.html" />
 
     <meta name="generator" content="sphinx-4.3.2, furo 2022.06.21"/>
-        <title>Embassy STM32 HAL - embassy-cn 0.1.0 文档</title>
+        <title>Embassy STM32 硬件抽象层 - embassy-cn 0.1.0 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -169,7 +169,7 @@
 </li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">硬件抽象层 HAL</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="nRF.html">Embassy nRF HAL</a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Embassy STM32 HAL</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Embassy STM32 硬件抽象层</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../5-Bootloader/index.html">引导程序</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -217,25 +217,29 @@
           </label>
         </div>
         <article role="main">
-          <div class="section" id="embassy-stm32-hal">
-<h1>Embassy STM32 HAL<a class="headerlink" href="#embassy-stm32-hal" title="永久链接至标题">#</a></h1>
-<p>The <a class="reference external" href="https://github.com/embassy-rs/embassy/tree/master/embassy-stm32">Embassy STM32 HAL</a> is based on the <code class="docutils literal notranslate"><span class="pre">stm32-metapac</span></code> project.</p>
-<div class="section" id="the-infinite-variant-problem">
-<h2>The infinite variant problem<a class="headerlink" href="#the-infinite-variant-problem" title="永久链接至标题">#</a></h2>
-<p>STM32 microcontrollers come in many families, and flavors and supporting all of them is a big undertaking. Embassy has taken advantage of the fact that the STM32 peripheral versions are shared across chip families. Instead of re-implementing the SPI peripheral for every STM32 chip family, embassy has a single SPI implementation that depends on code-generated register types that are identical for STM32 families with the same version of a given peripheral.</p>
-<div class="section" id="the-metapac">
-<h3>The metapac<a class="headerlink" href="#the-metapac" title="永久链接至标题">#</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">stm32-metapac</span></code> module uses pre-generated chip and register definitions for STM32 chip families to generate register types. This is done at compile time based on Cargo feature flags.</p>
-<p>The chip and register definitions are located in a separate module, <code class="docutils literal notranslate"><span class="pre">stm32-data</span></code>, which is modified whenever a bug is found in the definitions, or when adding support for new chip families.</p>
+          <div class="section" id="embassy-stm32">
+<h1>Embassy STM32 硬件抽象层<a class="headerlink" href="#embassy-stm32" title="永久链接至标题">#</a></h1>
+<div class="admonition seealso">
+<p class="admonition-title">参见</p>
+<p><a class="reference external" href="https://embassy.dev/book/dev/stm32.html">https://embassy.dev/book/dev/stm32.html</a></p>
 </div>
-<div class="section" id="he-hal">
-<h3>he HAL<a class="headerlink" href="#he-hal" title="永久链接至标题">#</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">embassy-stm32</span></code> module contains the HAL implementation for all STM32 families. The implementation uses automatically derived feature flags to support the correct version of a given peripheral for a given chip family.</p>
+<p><a class="reference external" href="https://github.com/embassy-rs/embassy/tree/master/embassy-stm32">Embassy_STM32_硬件抽象层</a> 建立于 <code class="docutils literal notranslate"><span class="pre">stm32-metapac</span></code> 基础之上。</p>
+<div class="section" id="id2">
+<h2>芯片系列与版本繁多的问题<a class="headerlink" href="#id2" title="永久链接至标题">#</a></h2>
+<p>STM32 微控制器有很多系列，支持所有系列是一项艰巨的任务。STM32 不同芯片系列的外设版本是相同的，Embassy 充分利用了的这个特征。Embassy 没有为每个 STM32 芯片系列都去实现一个外设接口，对于外设版本相同的 STM32 系列，会被代码生成相同的寄存器类型，Embassy 只针对不同寄存器类型，有一个单独的 SPI 实现。</p>
 </div>
+<div class="section" id="id3">
+<h2>外设的元信息<a class="headerlink" href="#id3" title="永久链接至标题">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">stm32-metapac</span></code> 模块生成寄存器类型时，使用了 STM32 芯片系列预先生成的芯片和寄存器定义。这是在编译时根据 Cargo 功能标志完成的。</p>
+<p>芯片和寄存器定义位于单独的 <code class="docutils literal notranslate"><span class="pre">stm32-data</span></code> 模块中，每当定义中发现错误，或添加对新芯片系列的支持时，就会对其进行修改。</p>
 </div>
-<div class="section" id="timer-driver">
-<h2>Timer driver<a class="headerlink" href="#timer-driver" title="永久链接至标题">#</a></h2>
-<p>The STM32 timer driver operates at 32768 Hz by default.</p>
+<div class="section" id="hal">
+<h2>硬件抽象层（HAL）<a class="headerlink" href="#hal" title="永久链接至标题">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">embassy-stm32</span></code> 模块包含了 STM32 全系列的硬件层抽象实现。对于给定芯片系列和外设版本，该实现使用自动派生出的特性标记，来支持相对应的版本。</p>
+</div>
+<div class="section" id="id4">
+<h2>定时器的驱动程序<a class="headerlink" href="#id4" title="永久链接至标题">#</a></h2>
+<p>STM32 定时器驱动程序默认工作频率为 32768 Hz。</p>
 </div>
 </div>
 
@@ -296,13 +300,11 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Embassy STM32 HAL</a><ul>
-<li><a class="reference internal" href="#the-infinite-variant-problem">The infinite variant problem</a><ul>
-<li><a class="reference internal" href="#the-metapac">The metapac</a></li>
-<li><a class="reference internal" href="#he-hal">he HAL</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#timer-driver">Timer driver</a></li>
+<li><a class="reference internal" href="#">Embassy STM32 硬件抽象层</a><ul>
+<li><a class="reference internal" href="#id2">芯片系列与版本繁多的问题</a></li>
+<li><a class="reference internal" href="#id3">外设的元信息</a></li>
+<li><a class="reference internal" href="#hal">硬件抽象层（HAL）</a></li>
+<li><a class="reference internal" href="#id4">定时器的驱动程序</a></li>
 </ul>
 </li>
 </ul>
