@@ -1,4 +1,4 @@
-# embassy-cn
+# [embassy-cn](https://lighklife.github.io/embassy-cn/)
 
 ## 翻译步骤
 
