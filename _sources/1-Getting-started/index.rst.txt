@@ -7,78 +7,72 @@
    Basic-application
 
 
-So you want to try Embassy, great! To get started, there are a few tools you need to install:
+原文：[https://embassy.dev/book/dev/getting_started.html](https://embassy.dev/book/dev/getting_started.html
 
-- [rustup](https://rustup.rs/) - the Rust toolchain is needed to compile Rust code.
+已经迫不及待要上手了吗？稍等，要正式开始工作前，我们需要做一些准备。
 
-- [probe-rs](https://crates.io/crates/probe-rs) - to flash the firmware on your device. If you already have other tools like `OpenOCD` setup, you can use that as well.
+在您的开发环境中，需要确保以下软件已正确安装：
 
-If you don’t have any supported board, don’t worry: you can also run embassy on your PC using the `std` examples.
+- `rustup <https://rustup.rs/>`_ Rust工具链，参考官方链接或各发行版的安装文档
+- `probe-run <https://crates.io/crates/probe-run>`_ 一款固件写入工具，在将固件写入设备时需要。您也可以使用其他工具来做同样的事情，比如`OpenOCD`。
 
-Getting a board with examples
--------------------------------
+不用担心没有已支持的开发板，您可以在PC上，通过使用`std`来运行Embbassy应用。
+
+支持的型号
+-------------------------------------------
+
+Embassy支持很多型号的微控制器，不过最容易的方式就是拥有一块更常见的开发板套件。
+
+nRF套件
+^^^^^^^^^^^
+
+- `nRF52 Dk <https://www.nordicsemi.com/Products/Development-hardware/nrf52-dk>`_
+- `nRF9160 DK <https://www.nordicsemi.com/Products/Development-hardware/nRF9160-DK>`_
+
+STM32套件
+^^^^^^^^^^^
+
+- `STM32 Nucleo-144（STM32H743ZI MCU）<https://www.st.com/en/evaluation-tools/nucleo-h743zi.html>`_ 开发板
+- `STM32 Nucleo-144（STM32F429ZI MCU）<https://www.st.com/en/evaluation-tools/nucleo-f429zi.html>`_ 开发板
+- `STM32L4+ <https://www.st.com/en/evaluation-tools/b-l4s5i-iot01a.html>`_ loT开发套件,支持低功耗无线, BLE, NFC, WiFi
+- `STM32L0 <https://www.st.com/en/evaluation-tools/b-l072z-lrwan1.html>`_ 开发套件，支持LoRa, Sigfox, 低功耗无线
+- `STM32 Nculeo-64（STM32WL55JCI）<https://www.st.com/en/evaluation-tools/nucleo-wl55jc.html>`_ 开发版
+- `STM32U5 <https://www.st.com/en/evaluation-tools/nucleo-wl55jc.html>`_ loT开发套件
+
+RP2040套件
+^^^^^^^^^^^
+
+- `树莓派Pico <https://www.raspberrypi.com/products/raspberry-pi-pico/>`_
+
+运行实例
+-------------------------------------------
+
+首先从git仓库克隆代码到本地：
+
+.. code-block::console
+    :linenos:
+
+    git clone https://github.com/embassy-rs/embassy.git
+    cd embassy
+    git submodule update --init
 
 
-Embassy supports many microcontroller families, but the easiest ways to get started is if you have one of the more common development kits.
+执行下列命令运行示例程序：
 
-nRF kits
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. code-block::console
+    :linenos:
 
-- [nRF52 DK](https://www.nordicsemi.com/Products/Development-hardware/nrf52-dk)
-
-- [nRF9160 DK](https://www.nordicsemi.com/Products/Development-hardware/nRF9160-DK)
-
-STM32 kits
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    cd examples/nrf
+    cargo run --bin blinky --release
 
 
-- [STM32 Nucleo-144 development board with STM32H743ZI MCU](https://www.st.com/en/evaluation-tools/nucleo-h743zi.html)
+下一章节内容预告
+-------------------------------------------
 
-- [STM32 Nucleo-144 development board with STM32F429ZI MCU](https://www.st.com/en/evaluation-tools/nucleo-f429zi.html)
+恭喜，您已经成功运行了第一个Embassy应用程序！接下来您可以：
 
-- [STM32L4+ Discovery kit IoT node, low-power wireless, BLE, NFC, WiFi](https://www.st.com/en/evaluation-tools/b-l4s5i-iot01a.html)
+- 了解 `执行器 <https://embassy.dev/dev/runtime.html>`_ 的更多细节
+- 了解 `HAL <https://embassy.dev/dev/hal.html>`_ 的更多细节
+- 开始 `编写自己的应用程序 <https://embassy.dev/dev/basic_application.html>`_
 
-- [STM32L0 Discovery kit LoRa, Sigfox, low-power wireless](https://www.st.com/en/evaluation-tools/b-l072z-lrwan1.html)
-
-- [STM32 Nucleo-64 development board with STM32WL55JCI MCU](https://www.st.com/en/evaluation-tools/nucleo-wl55jc.html)
-
-- [Discovery kit for IoT node with STM32U5 series](https://www.st.com/en/evaluation-tools/b-u585i-iot02a.html)
-
-RP2040 kits
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-- [Raspberry Pi Pico](https://www.raspberrypi.com/products/raspberry-pi-pico/)
-
-ESP32
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-- [ESP32C3](https://github.com/esp-rs/esp-rust-board)
-
-Running an example
--------------------------------
-
-First you need to clone the [github repository];
-
-```bash
-git clone https://github.com/embassy-rs/embassy.git
-cd embassy
-```
-
-You can run an example by opening a terminal and entering the following commands:
-
-```bash
-cd examples/nrf52840
-cargo run --bin blinky --release
-```
-
-What’s next?
--------------------------------
-
-Congratulations, you have your first Embassy application running! Here are some alternatives on where to go from here:
-
-- Read more about the [executor](https://embassy.dev/book/dev/runtime.html).
-
-- Read more about the [HAL](https://embassy.dev/book/dev/hal.html).
-
-- Start [writing your application](https://embassy.dev/book/dev/basic_application.html).
 

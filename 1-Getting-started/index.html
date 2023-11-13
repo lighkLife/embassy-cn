@@ -224,66 +224,54 @@
 <li class="toctree-l1"><a class="reference internal" href="Basic-application.html">基本应用示例</a></li>
 </ul>
 </div>
-<p>So you want to try Embassy, great! To get started, there are a few tools you need to install:</p>
+<p>原文：[<a class="reference external" href="https://embassy.dev/book/dev/getting_started.html](https://embassy.dev/book/dev/getting_started.html">https://embassy.dev/book/dev/getting_started.html](https://embassy.dev/book/dev/getting_started.html</a></p>
+<p>已经迫不及待要上手了吗？稍等，要正式开始工作前，我们需要做一些准备。</p>
+<p>在您的开发环境中，需要确保以下软件已正确安装：</p>
 <ul class="simple">
-<li><p>[rustup](<a class="reference external" href="https://rustup.rs/">https://rustup.rs/</a>) - the Rust toolchain is needed to compile Rust code.</p></li>
-<li><p>[probe-rs](<a class="reference external" href="https://crates.io/crates/probe-rs">https://crates.io/crates/probe-rs</a>) - to flash the firmware on your device. If you already have other tools like <cite>OpenOCD</cite> setup, you can use that as well.</p></li>
+<li><p><a class="reference external" href="https://rustup.rs/">rustup</a> Rust工具链，参考官方链接或各发行版的安装文档</p></li>
+<li><p><a class="reference external" href="https://crates.io/crates/probe-run">probe-run</a> 一款固件写入工具，在将固件写入设备时需要。您也可以使用其他工具来做同样的事情，比如`OpenOCD`。</p></li>
 </ul>
-<p>If you don’t have any supported board, don’t worry: you can also run embassy on your PC using the <cite>std</cite> examples.</p>
-<div class="section" id="getting-a-board-with-examples">
-<h2>Getting a board with examples<a class="headerlink" href="#getting-a-board-with-examples" title="永久链接至标题">#</a></h2>
-<p>Embassy supports many microcontroller families, but the easiest ways to get started is if you have one of the more common development kits.</p>
-<div class="section" id="nrf-kits">
-<h3>nRF kits<a class="headerlink" href="#nrf-kits" title="永久链接至标题">#</a></h3>
+<p>不用担心没有已支持的开发板，您可以在PC上，通过使用`std`来运行Embbassy应用。</p>
+<div class="section" id="id2">
+<h2>支持的型号<a class="headerlink" href="#id2" title="永久链接至标题">#</a></h2>
+<p>Embassy支持很多型号的微控制器，不过最容易的方式就是拥有一块更常见的开发板套件。</p>
+<div class="section" id="nrf">
+<h3>nRF套件<a class="headerlink" href="#nrf" title="永久链接至标题">#</a></h3>
 <ul class="simple">
-<li><p>[nRF52 DK](<a class="reference external" href="https://www.nordicsemi.com/Products/Development-hardware/nrf52-dk">https://www.nordicsemi.com/Products/Development-hardware/nrf52-dk</a>)</p></li>
-<li><p>[nRF9160 DK](<a class="reference external" href="https://www.nordicsemi.com/Products/Development-hardware/nRF9160-DK">https://www.nordicsemi.com/Products/Development-hardware/nRF9160-DK</a>)</p></li>
-</ul>
-</div>
-<div class="section" id="stm32-kits">
-<h3>STM32 kits<a class="headerlink" href="#stm32-kits" title="永久链接至标题">#</a></h3>
-<ul class="simple">
-<li><p>[STM32 Nucleo-144 development board with STM32H743ZI MCU](<a class="reference external" href="https://www.st.com/en/evaluation-tools/nucleo-h743zi.html">https://www.st.com/en/evaluation-tools/nucleo-h743zi.html</a>)</p></li>
-<li><p>[STM32 Nucleo-144 development board with STM32F429ZI MCU](<a class="reference external" href="https://www.st.com/en/evaluation-tools/nucleo-f429zi.html">https://www.st.com/en/evaluation-tools/nucleo-f429zi.html</a>)</p></li>
-<li><p>[STM32L4+ Discovery kit IoT node, low-power wireless, BLE, NFC, WiFi](<a class="reference external" href="https://www.st.com/en/evaluation-tools/b-l4s5i-iot01a.html">https://www.st.com/en/evaluation-tools/b-l4s5i-iot01a.html</a>)</p></li>
-<li><p>[STM32L0 Discovery kit LoRa, Sigfox, low-power wireless](<a class="reference external" href="https://www.st.com/en/evaluation-tools/b-l072z-lrwan1.html">https://www.st.com/en/evaluation-tools/b-l072z-lrwan1.html</a>)</p></li>
-<li><p>[STM32 Nucleo-64 development board with STM32WL55JCI MCU](<a class="reference external" href="https://www.st.com/en/evaluation-tools/nucleo-wl55jc.html">https://www.st.com/en/evaluation-tools/nucleo-wl55jc.html</a>)</p></li>
-<li><p>[Discovery kit for IoT node with STM32U5 series](<a class="reference external" href="https://www.st.com/en/evaluation-tools/b-u585i-iot02a.html">https://www.st.com/en/evaluation-tools/b-u585i-iot02a.html</a>)</p></li>
+<li><p><a class="reference external" href="https://www.nordicsemi.com/Products/Development-hardware/nrf52-dk">nRF52 Dk</a></p></li>
+<li><p><a class="reference external" href="https://www.nordicsemi.com/Products/Development-hardware/nRF9160-DK">nRF9160 DK</a></p></li>
 </ul>
 </div>
-<div class="section" id="rp2040-kits">
-<h3>RP2040 kits<a class="headerlink" href="#rp2040-kits" title="永久链接至标题">#</a></h3>
+<div class="section" id="stm32">
+<h3>STM32套件<a class="headerlink" href="#stm32" title="永久链接至标题">#</a></h3>
 <ul class="simple">
-<li><p>[Raspberry Pi Pico](<a class="reference external" href="https://www.raspberrypi.com/products/raspberry-pi-pico/">https://www.raspberrypi.com/products/raspberry-pi-pico/</a>)</p></li>
+<li><p><a href="#id7"><span class="problematic" id="id8">`STM32 Nucleo-144（STM32H743ZI MCU）&lt;https://www.st.com/en/evaluation-tools/nucleo-h743zi.html&gt;`_</span></a> 开发板</p></li>
+<li><p><a href="#id9"><span class="problematic" id="id10">`STM32 Nucleo-144（STM32F429ZI MCU）&lt;https://www.st.com/en/evaluation-tools/nucleo-f429zi.html&gt;`_</span></a> 开发板</p></li>
+<li><p><a class="reference external" href="https://www.st.com/en/evaluation-tools/b-l4s5i-iot01a.html">STM32L4+</a> loT开发套件,支持低功耗无线, BLE, NFC, WiFi</p></li>
+<li><p><a class="reference external" href="https://www.st.com/en/evaluation-tools/b-l072z-lrwan1.html">STM32L0</a> 开发套件，支持LoRa, Sigfox, 低功耗无线</p></li>
+<li><p><a href="#id11"><span class="problematic" id="id12">`STM32 Nculeo-64（STM32WL55JCI）&lt;https://www.st.com/en/evaluation-tools/nucleo-wl55jc.html&gt;`_</span></a> 开发版</p></li>
+<li><p><a class="reference external" href="https://www.st.com/en/evaluation-tools/nucleo-wl55jc.html">STM32U5</a> loT开发套件</p></li>
 </ul>
 </div>
-<div class="section" id="esp32">
-<h3>ESP32<a class="headerlink" href="#esp32" title="永久链接至标题">#</a></h3>
+<div class="section" id="rp2040">
+<h3>RP2040套件<a class="headerlink" href="#rp2040" title="永久链接至标题">#</a></h3>
 <ul class="simple">
-<li><p>[ESP32C3](<a class="reference external" href="https://github.com/esp-rs/esp-rust-board">https://github.com/esp-rs/esp-rust-board</a>)</p></li>
+<li><p><a class="reference external" href="https://www.raspberrypi.com/products/raspberry-pi-pico/">树莓派Pico</a></p></li>
 </ul>
 </div>
 </div>
-<div class="section" id="running-an-example">
-<h2>Running an example<a class="headerlink" href="#running-an-example" title="永久链接至标题">#</a></h2>
-<p>First you need to clone the [github repository];</p>
-<p><code class="docutils literal notranslate"><span class="pre">`bash</span>
-<span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/embassy-rs/embassy.git</span>
-<span class="pre">cd</span> <span class="pre">embassy</span>
-<span class="pre">`</span></code></p>
-<p>You can run an example by opening a terminal and entering the following commands:</p>
-<p><code class="docutils literal notranslate"><span class="pre">`bash</span>
-<span class="pre">cd</span> <span class="pre">examples/nrf52840</span>
-<span class="pre">cargo</span> <span class="pre">run</span> <span class="pre">--bin</span> <span class="pre">blinky</span> <span class="pre">--release</span>
-<span class="pre">`</span></code></p>
+<div class="section" id="id3">
+<h2>运行实例<a class="headerlink" href="#id3" title="永久链接至标题">#</a></h2>
+<p>首先从git仓库克隆代码到本地：</p>
+<p>执行下列命令运行示例程序：</p>
 </div>
-<div class="section" id="whats-next">
-<h2>What’s next?<a class="headerlink" href="#whats-next" title="永久链接至标题">#</a></h2>
-<p>Congratulations, you have your first Embassy application running! Here are some alternatives on where to go from here:</p>
+<div class="section" id="id4">
+<h2>下一章节内容预告<a class="headerlink" href="#id4" title="永久链接至标题">#</a></h2>
+<p>恭喜，您已经成功运行了第一个Embassy应用程序！接下来您可以：</p>
 <ul class="simple">
-<li><p>Read more about the [executor](<a class="reference external" href="https://embassy.dev/book/dev/runtime.html">https://embassy.dev/book/dev/runtime.html</a>).</p></li>
-<li><p>Read more about the [HAL](<a class="reference external" href="https://embassy.dev/book/dev/hal.html">https://embassy.dev/book/dev/hal.html</a>).</p></li>
-<li><p>Start [writing your application](<a class="reference external" href="https://embassy.dev/book/dev/basic_application.html">https://embassy.dev/book/dev/basic_application.html</a>).</p></li>
+<li><p>了解 <a class="reference external" href="https://embassy.dev/dev/runtime.html">执行器</a> 的更多细节</p></li>
+<li><p>了解 <a class="reference external" href="https://embassy.dev/dev/hal.html">HAL</a> 的更多细节</p></li>
+<li><p>开始 <a class="reference external" href="https://embassy.dev/dev/basic_application.html">编写自己的应用程序</a></p></li>
 </ul>
 </div>
 </div>
@@ -346,15 +334,14 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">快速开始</a><ul>
-<li><a class="reference internal" href="#getting-a-board-with-examples">Getting a board with examples</a><ul>
-<li><a class="reference internal" href="#nrf-kits">nRF kits</a></li>
-<li><a class="reference internal" href="#stm32-kits">STM32 kits</a></li>
-<li><a class="reference internal" href="#rp2040-kits">RP2040 kits</a></li>
-<li><a class="reference internal" href="#esp32">ESP32</a></li>
+<li><a class="reference internal" href="#id2">支持的型号</a><ul>
+<li><a class="reference internal" href="#nrf">nRF套件</a></li>
+<li><a class="reference internal" href="#stm32">STM32套件</a></li>
+<li><a class="reference internal" href="#rp2040">RP2040套件</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#running-an-example">Running an example</a></li>
-<li><a class="reference internal" href="#whats-next">What’s next?</a></li>
+<li><a class="reference internal" href="#id3">运行实例</a></li>
+<li><a class="reference internal" href="#id4">下一章节内容预告</a></li>
 </ul>
 </li>
 </ul>
