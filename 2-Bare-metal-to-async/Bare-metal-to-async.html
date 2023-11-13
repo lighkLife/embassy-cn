@@ -219,6 +219,7 @@
         <article role="main">
           <div class="section" id="rust">
 <h1>从裸机到异步Rust<a class="headerlink" href="#rust" title="永久链接至标题">#</a></h1>
+<p>原文：<a class="reference external" href="https://embassy.dev/book/dev/layer_by_layer.html">https://embassy.dev/book/dev/layer_by_layer.html</a></p>
 <p>作为Embassy新手，可能会觉得所有的术语和概念都很难理解。本章旨在阐明Embassy中的不同层次，以及每一层次为应用程序编写者解决的问题。</p>
 <p>本例中使用的是STM32 IOT01A开发板，很容易转换为任何STM32芯片。对于nRF，它的PAC本身并未在Embassy项目中维护，但概念和层次结构是类似的。</p>
 <p>我们将编写的应用程序非常简单，它实现的功能仅仅是：按下按钮，让LED闪烁。它的输入输出处理非常典型，对于后续要讨论的所有示例都非常有参考价值。我们将从外设访问包(PAC)示例开始，异步示例结束。</p>

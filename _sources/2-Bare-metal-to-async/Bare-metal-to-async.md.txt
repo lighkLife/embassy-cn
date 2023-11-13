@@ -1,5 +1,7 @@
 # 从裸机到异步Rust
 
+原文：[https://embassy.dev/book/dev/layer_by_layer.html](https://embassy.dev/book/dev/layer_by_layer.html)
+
 作为Embassy新手，可能会觉得所有的术语和概念都很难理解。本章旨在阐明Embassy中的不同层次，以及每一层次为应用程序编写者解决的问题。
 
 本例中使用的是STM32 IOT01A开发板，很容易转换为任何STM32芯片。对于nRF，它的PAC本身并未在Embassy项目中维护，但概念和层次结构是类似的。
