@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="prev" title="开发者文档" href="index.html" />
 
     <meta name="generator" content="sphinx-4.3.2, furo 2022.06.21"/>
-        <title>Developer Documentation: STM32 - embassy-cn 0.1.0 文档</title>
+        <title>开发者文档：STM32 - embassy-cn 0.1.0 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -181,7 +181,7 @@
 </ul>
 </li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">开发者文档</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Developer Documentation: STM32</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">开发者文档：STM32</a></li>
 </ul>
 </li>
 </ul>
@@ -217,31 +217,36 @@
           </label>
         </div>
         <article role="main">
-          <div class="section" id="developer-documentation-stm32">
-<h1>Developer Documentation: STM32<a class="headerlink" href="#developer-documentation-stm32" title="永久链接至标题">#</a></h1>
-<div class="section" id="understanding-metapac">
-<h2><a class="reference external" href="https://embassy.dev/book/dev/developer_stm32.html#_understanding_metapac">Understanding metapac</a><a class="headerlink" href="#understanding-metapac" title="永久链接至标题">#</a></h2>
-<p>When a project that imports <code class="docutils literal notranslate"><span class="pre">embassy-stm32</span></code> is compiled, that project selects the feature corresponding to the chip that project is using. Based on that feature, <code class="docutils literal notranslate"><span class="pre">embassy-stm32</span></code> selects supported <a class="reference external" href="https://anysilicon.com/ip-intellectual-property-core-semiconductors/">IP</a> for the chip, and enables the corresponding HAL implementations. But how does <code class="docutils literal notranslate"><span class="pre">embassy-stm32</span></code> know what IP the chip contains, out of the hundreds of chips that we support? It’s a long story that starts with <code class="docutils literal notranslate"><span class="pre">stm32-data-sources</span></code>.</p>
+          <div class="section" id="stm32">
+<h1>开发者文档：STM32<a class="headerlink" href="#stm32" title="永久链接至标题">#</a></h1>
+<p>原文： https://embassy.dev/book/dev/developer_stm32.html</p>
+<div class="section" id="meta-pac">
+<h2>了解外设元信息（meta-pac）<a class="headerlink" href="#meta-pac" title="永久链接至标题">#</a></h2>
+<p>当一个项目编译导入<code class="docutils literal notranslate"><span class="pre">embassy-stm32</span></code> <code class="docutils literal notranslate"><span class="pre">crate</span></code> 时，该项目正在使用哪个的芯片，该项目就会使用哪个芯片对应的功能。根据这个特性，<code class="docutils literal notranslate"><span class="pre">embassy-stm32</span></code> 会选择芯片所支持的 <a class="reference external" href="https://anysilicon.com/ip-intellectual-property-core-semiconductors/">IP</a> （半导体知识产权），并启用相应的硬件抽象层实现（HAL）。我们支持数百种芯片，但是<code class="docutils literal notranslate"><span class="pre">embassy-stm32</span></code> 是如何知道哪个芯片包含哪个 IP 呢？ 说来话长，这就算一个关于<code class="docutils literal notranslate"><span class="pre">stm32-data-sources</span></code> 的故事了。</p>
+<blockquote>
+<div><p>注：<strong>半导体知识产权</strong></p>
+<p>半导体中的知识产权 (IP) 核心是可重用的逻辑或功能单元或单元或布局设计，通常是按照向多个供应商授权，以用作不同芯片设计中的构建块的想法来开发的。</p>
+</div></blockquote>
 </div>
 <div class="section" id="stm32-data-sources">
-<h2><a class="reference external" href="https://embassy.dev/book/dev/developer_stm32.html#_stm32_data_sources">stm32-data-sources</a><a class="headerlink" href="#stm32-data-sources" title="永久链接至标题">#</a></h2>
-<p><a class="reference external" href="https://github.com/embassy-rs/stm32-data-sources"><code class="docutils literal notranslate"><span class="pre">stm32-data-sources</span></code></a> is as mostly barren repository. It has no README, no documentation, and few watchers. But it’s the core of what makes <code class="docutils literal notranslate"><span class="pre">embassy-stm32</span></code> possible. The data for every chip that we support is taken in part from a corresponding XML file like <a class="reference external" href="https://github.com/embassy-rs/stm32-data-sources/blob/b8b85202e22a954d6c59d4a43d9795d34cff05cf/cubedb/mcu/STM32F051K4Ux.xml"><code class="docutils literal notranslate"><span class="pre">STM32F051K4Ux.xml</span></code></a>. In that file, you’ll see lines like the following:</p>
+<h2>stm32-data-sources<a class="headerlink" href="#stm32-data-sources" title="永久链接至标题">#</a></h2>
+<p><a class="reference external" href="https://github.com/embassy-rs/stm32-data-sources"><code class="docutils literal notranslate"><span class="pre">stm32-data-sources</span></code></a> 是一个比较“荒凉”的仓库。它没有说明书，没有文档，关注的人很少。但它是<code class="docutils literal notranslate"><span class="pre">embassy-stm32</span></code> 成功的关键。在这个仓库你，我们支持的芯片都有一个相关的 XML 文件，比如 <a class="reference external" href="https://github.com/embassy-rs/stm32-data-sources/blob/b8b85202e22a954d6c59d4a43d9795d34cff05cf/cubedb/mcu/STM32F051K4Ux.xml"><code class="docutils literal notranslate"><span class="pre">STM32F051K4Ux.xml</span></code></a>。在这个文件中，你可以看到如下的内容：</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="nt">&lt;IP</span><span class="w"> </span><span class="na">InstanceName=</span><span class="s">&quot;I2C1&quot;</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;I2C&quot;</span><span class="w"> </span><span class="na">Version=</span><span class="s">&quot;i2c2_v1_1_Cube&quot;</span><span class="nt">/&gt;</span>
 <span class="w">    </span><span class="cm">&lt;!-- snip  --&gt;</span>
-<span class="w">    </span><span class="nt">&lt;IP</span><span class="w"> </span><span class="na">ConfigFile=</span><span class="s">&quot;TIM-STM32F0xx&quot;</span><span class="w"> </span><span class="na">InstanceName=</span><span class="s">&quot;TIM1&quot;</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;TIM1_8F0&quot;</span><span class="w"> </span><span class="na">Version=</span><span class="s">&quot;gptimer2_v2_x_Cube&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;IP</span><span class="w"> </span><span class="na">ConfigFile=</span><span class="s">&quot;TIM-STM32F0xx&quot;</span><span class="w"> </span><span class="na">InstanceName=</span><span class="s">&quot;TIM1&quot;</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;TIM1_8F0&quot;</span><span class="w"> </span><span class="na">Version=</span><span class="s">&quot;gptimer2_v2_x_Cube&quot;</span><span class="nt">/&gt;</span><span class="w">   </span>##<span class="w"> </span>
 </pre></div>
 </div>
-<p>These lines indicate that this chip has an i2c, and that it’s version is “v1_1”. It also indicates that it has a general purpose timer that with a version of “v2_x”. From this data, it’s possible to determine which implementations should be included in <code class="docutils literal notranslate"><span class="pre">embassy-stm32</span></code>. But actually doing that is another matter.</p>
+<p>这些内容说明这个芯片有一个 i2c（一种同步串行总线）, 它的版本是”v1_1”。同时，说明它还有一个通用的定时器（timer），版本是 “v2_x”。通过这些数据，就可以决定<code class="docutils literal notranslate"><span class="pre">embassy-stm32</span></code> 应该被包含哪些实现。但实际上，这些工作就是另一回事了。</p>
 </div>
 <div class="section" id="stm32-data">
-<h2><a class="reference external" href="https://embassy.dev/book/dev/developer_stm32.html#_stm32_data">stm32-data</a><a class="headerlink" href="#stm32-data" title="永久链接至标题">#</a></h2>
-<p>While all users of this project are familiar with <code class="docutils literal notranslate"><span class="pre">embassy-stm32</span></code>, fewer are familiar with the project that powers it: <code class="docutils literal notranslate"><span class="pre">stm32-data</span></code>. This project doesn’t just aim to generate data for <code class="docutils literal notranslate"><span class="pre">embassy-stm32</span></code>, but for machine consumption in general. To acheive this, information from multiple files from the <code class="docutils literal notranslate"><span class="pre">stm32-data-sources</span></code> project are combined and parsed to assign register block implementations for each supported IP. The core of this matching resides in <code class="docutils literal notranslate"><span class="pre">chips.rs</span></code>:</p>
+<h2>stm32-data<a class="headerlink" href="#stm32-data" title="永久链接至标题">#</a></h2>
+<p>虽然该项目的所有用户都熟悉<code class="docutils literal notranslate"><span class="pre">embassy-stm32</span></code>，但很少有人熟悉为其提供支持的项目：<code class="docutils literal notranslate"><span class="pre">stm32-data</span></code>。这个项目旨在为<code class="docutils literal notranslate"><span class="pre">embassy-stm32</span></code>生成和使用必要的数据。为此，通过组合和解析<code class="docutils literal notranslate"><span class="pre">stm32-data-sources</span></code>项目下多个文件，来得到相关信息，再按所支持芯片的 IP ，来分配寄存器块实现。这些操作主要在<code class="docutils literal notranslate"><span class="pre">chips.rs</span></code>中：</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="p">(</span><span class="s">&quot;.*:I2C:i2c2_v1_1&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;i2c&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;v2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;I2C&quot;</span><span class="p">)),</span>
 <span class="w">    </span><span class="c1">// snip</span>
 <span class="w">    </span><span class="p">(</span><span class="s">r&quot;.*TIM\d.*:gptimer.*&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;timer&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;v1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;TIM_GP16&quot;</span><span class="p">)),</span>
 </pre></div>
 </div>
-<p>In this case, the i2c version corresponds to our “v2” and the general purpose timer version corresponds to our “v1”. Therefore, the <code class="docutils literal notranslate"><span class="pre">i2c_v2.yaml</span></code> and <code class="docutils literal notranslate"><span class="pre">timer_v1.yaml</span></code> register block implementations are assigned to those IP, respectively. The result is that these lines arr generated in <code class="docutils literal notranslate"><span class="pre">STM32F051K4.json</span></code>:</p>
+<p>在这种情况下，i2c 的版本对于我们实现的 “v2”版本，通用定时器（timer）版本对应于我们的“v1”版本。因此，<code class="docutils literal notranslate"><span class="pre">i2c_v2.yaml</span></code>和<code class="docutils literal notranslate"><span class="pre">timer_v1.yaml</span></code>寄存器块实现就对应 i2c v2 和 timer v1 这些 IP。<code class="docutils literal notranslate"><span class="pre">STM32F051K4.json</span></code>就是这些内容生的结果：</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="p">{</span>
 <span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;I2C1&quot;</span><span class="p">,</span>
 <span class="w">        </span><span class="nt">&quot;address&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1073763328</span><span class="p">,</span>
@@ -265,20 +270,20 @@
 <span class="w">    </span><span class="p">}</span>
 </pre></div>
 </div>
-<p>In addition to register blocks, data for pin and RCC mapping is also generated and consumed by <code class="docutils literal notranslate"><span class="pre">embassy-stm32</span></code>. <code class="docutils literal notranslate"><span class="pre">stm32-metapac-gen</span></code> is used to package and publish the data as a crate.</p>
+<p>除了寄存器块之外，芯片引脚和复位与时钟（RCC）映射的数据也由<code class="docutils literal notranslate"><span class="pre">embassy-stm32</span></code>生成和使用。<code class="docutils literal notranslate"><span class="pre">stm32-metapac-gen</span></code>用于将数据打包并发布为 crate。</p>
 </div>
 <div class="section" id="embassy-stm32">
-<h2><a class="reference external" href="https://embassy.dev/book/dev/developer_stm32.html#_embassy_stm32">embassy-stm32</a><a class="headerlink" href="#embassy-stm32" title="永久链接至标题">#</a></h2>
-<p>In the <code class="docutils literal notranslate"><span class="pre">lib.rs</span></code> file located in the root of <code class="docutils literal notranslate"><span class="pre">embassy-stm32</span></code>, you’ll see this line:</p>
+<h2>embassy-stm32<a class="headerlink" href="#embassy-stm32" title="永久链接至标题">#</a></h2>
+<p>在<code class="docutils literal notranslate"><span class="pre">embassy-stm32</span></code>的根目录<code class="docutils literal notranslate"><span class="pre">lib.rs</span></code>文件中，您将看到这一行：</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="cp">#[cfg(i2c)]</span>
 <span class="k">pub</span><span class="w"> </span><span class="k">mod</span> <span class="nn">i2c</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>And in the <code class="docutils literal notranslate"><span class="pre">mod.rs</span></code> of the i2c mod, you’ll see this:</p>
+<p>在<code class="docutils literal notranslate"><span class="pre">mod.rs</span></code> 中的 i2c 模块中，您将看到这一行：</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="cp">#[cfg_attr(i2c_v2, path = </span><span class="s">&quot;v2.rs&quot;</span><span class="cp">)]</span>
 </pre></div>
 </div>
-<p>Because i2c is supported for STM32F051K4 and its version corresponds to our “v2”, the <code class="docutils literal notranslate"><span class="pre">i2c</span></code> and <code class="docutils literal notranslate"><span class="pre">i2c_v2</span></code>, configuration directives will be present, and <code class="docutils literal notranslate"><span class="pre">embassy-stm32</span></code> will include these files, respectively. This and other configuration directives and tables are generated from the data for chip, allowing <code class="docutils literal notranslate"><span class="pre">embassy-stm32</span></code> to expressively and clearly adapt logic and implementations to what is required for each chip. Compared to other projects across the embedded ecosystem, <code class="docutils literal notranslate"><span class="pre">embassy-stm32</span></code> is the only project that can re-use code across the entire stm32 lineup and remove difficult-to-implement unsafe logic to the HAL.</p>
+<p>由于 STM32F051K4 支持 i2c，并且其版本对应于我们的“v2”，所以将出现<code class="docutils literal notranslate"><span class="pre">i2c</span></code>和<code class="docutils literal notranslate"><span class="pre">i2c_v2</span></code>配置指令。上述这些文件都在<code class="docutils literal notranslate"><span class="pre">embassy-stm32</span></code>中。根据芯片数据，可以生成配置指令和配置表，根据这些生成数据，<code class="docutils literal notranslate"><span class="pre">embassy-stm32</span></code> 就可以明确且清晰适配每个芯片所需要的逻辑和实现。与嵌入式生态系统中的其他项目相比，<code class="docutils literal notranslate"><span class="pre">embassy-stm32</span></code>是唯一一个项目：可以在整个 stm32 系列中重用代码，并删除了硬件抽象层中难以实现的不安全逻辑。</p>
 </div>
 </div>
 
@@ -331,8 +336,8 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Developer Documentation: STM32</a><ul>
-<li><a class="reference internal" href="#understanding-metapac">Understanding metapac</a></li>
+<li><a class="reference internal" href="#">开发者文档：STM32</a><ul>
+<li><a class="reference internal" href="#meta-pac">了解外设元信息（meta-pac）</a></li>
 <li><a class="reference internal" href="#stm32-data-sources">stm32-data-sources</a></li>
 <li><a class="reference internal" href="#stm32-data">stm32-data</a></li>
 <li><a class="reference internal" href="#embassy-stm32">embassy-stm32</a></li>
