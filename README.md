@@ -10,7 +10,7 @@
 
 | 原章节                                                                                       | 翻译作者      | 状态  |
 |-------------------------------------------------------------------------------------------|-----------|-----|
-| [Embassy](https://embassy.dev/book/dev/index.htmlhttps://embassy.dev/book/dev/index.html) | [ziyouwa](https://github.com/ziyouwa/) | 已完成 |
+| [Embassy](https://embassy.dev/book/dev/index.html) | [ziyouwa](https://github.com/ziyouwa/) | 已完成 |
 | [Getting started](https://embassy.dev/book/dev/getting_started.html)                      | [ziyouwa](https://github.com/ziyouwa/) | 已完成 |
 | [Basic application](https://embassy.dev/book/dev/basic_application.html)                  | [ziyouwa](https://github.com/ziyouwa/) | 已完成 |
 | [Bare metal to async](https://embassy.dev/book/dev/layer_by_layer.html)                   | [ziyouwa](https://github.com/ziyouwa/) | 已完成 |
