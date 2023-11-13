@@ -20,4 +20,4 @@
 | [STM32](https://embassy.dev/book/dev/stm32.html) |  [LighkLife](https://github.com/lighkLife/) | 已完成 |     |
 | [Bootloader](https://embassy.dev/book/dev/bootloader.html) | [StageGuard](https://github.com/StageGuard) | 已完成 |     |
 | [Examples](https://embassy.dev/book/dev/examples.html) |  [LighkLife](https://github.com/lighkLife/) | 已完成 |     |
-| [Developers](https://embassy.dev/book/dev/developer.html) | [LighkLife](https://github.com/lighkLife/) | 已完成 |     |
+| [Developers](https://embassy.dev/book/dev/developer_stm32.html) | [LighkLife](https://github.com/lighkLife/) | 已完成 |     |
