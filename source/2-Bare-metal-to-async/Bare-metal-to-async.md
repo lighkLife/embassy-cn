@@ -1,18 +1,18 @@
-# From bare metal to async Rust
+# 从裸机到异步Rust
 
-If you’re new to Embassy, it can be overwhelming to grasp all the terminology and concepts. This guide aims to clarify the different layers in Embassy, which problem each layer solves for the application writer.
+作为Embassy新手，可能会觉得所有的术语和概念都很难理解。本章旨在阐明Embassy中的不同层次，以及每一层次为应用程序编写者解决的问题。
 
-This guide uses the STM32 IOT01A board, but should be easy to translate to any STM32 chip. For nRF, the PAC itself is not maintained within the Embassy project, but the concepts and the layers are similar.
+本例中使用的是STM32 IOT01A开发板，很容易转换为任何STM32芯片。对于nRF，它的PAC本身并未在Embassy项目中维护，但概念和层次结构是类似的。
 
-The application we’ll write is a simple 'push button, blink led' application, which is great for illustrating input and output handling for each of the examples we’ll go through. We’ll start at the Peripheral Access Crate (PAC) example and end at the async example.
+我们将编写的应用程序非常简单，它实现的功能仅仅是：按下按钮，让LED闪烁。它的输入输出处理非常典型，对于后续要讨论的所有示例都非常有参考价值。我们将从外设访问包(PAC)示例开始，异步示例结束。
 
-## PAC version
+## PAC版本
 
-The PAC is the lowest API for accessing peripherals and registers, if you don’t count reading/writing directly to memory addresses. It provides distinct types to make accessing peripheral registers easier, but it does not prevent you from writing unsafe code.
+如果不直接从内存读取的话，PAC（Peripheral Access Crate，外设访问包）是访问外设和寄存器的最底层API。它提供了不同的类型来使访问外设寄存器更容易，但它并不能阻止你编写不安全的代码。
 
-Writing an application using the PAC directly is therefore not recommended, but if the functionality you want to use is not exposed in the upper layers, that’s what you need to use.
+因此，直接使用PAC编写应用程序并不推荐，建议仅在上层没有暴露您想使用的接口时使用。
 
-The blinky app using PAC is shown below:
+使用PAC的示例程序如下：
 
 ```rust
 #![no_std]
@@ -70,21 +70,19 @@ fn main() -> ! {
 }
 ```
 
-As you can see, a lot of code is needed to enable the peripheral clocks and to configure the input pins and the output pins of the application.
+正如你所看到的，PAC层次的抽象中，启用外设时钟，配置应用程序的输入引脚和输出引脚，都需要大量的代码。
 
-Another downside of this application is that it is busy-looping while polling the button state. This prevents the microcontroller from utilizing any sleep mode to save power.
+它的另一个缺点是：在轮询按钮状态时会忙等待。这阻止了微控制器利用睡眠模式来节省能源。
 
-## HAL version
+## HAL版本
 
-To simplify our application, we can use the HAL instead. The HAL exposes higher level APIs that handle details such as:
+为了简化我们的应用程序，我们可以选择使用HAL（硬件抽象层）。HAL提供了更高级别的API抽象，它可以处理以下细节：
 
-- Automatically enabling the peripheral clock when you’re using the peripheral
+- 使用外设时，自动启用外设时钟
+- 在更高层次的类型中派生并应用寄存器配置
+- 实现嵌入式硬件抽象层(embedded-hal)特性，使外设能用于第三方驱动程序
 
-- Deriving and applying register configuration from higher level types
-
-- Implementing the embedded-hal traits to make peripherals useful in third party drivers
-
-The HAL example is shown below:
+下面是采用HAL的示例程序：
 
 ```rust
 #![no_std]
@@ -110,17 +108,17 @@ fn main() -> ! {
 }
 ```
 
-As you can see, the application becomes a lot simpler, even without using any async code. The `Input` and `Output` types hide all the details of accessing the GPIO registers and allow you to use a much simpler API for querying the state of the button and toggling the LED output.
+正如你所看到的，即使没有使用任何异步代码，应用程序也变得简单了很多。输入和输出类型隐藏了访问GPIO寄存器的所有细节，并允许你使用更简单的API来查询按钮的状态和切换LED输出。
 
-The same downside from the PAC example still applies though: the application is busy looping and consuming more power than necessary.
+然而，PAC示例中的缺点在这里仍然存在：应用程序在忙等待，消耗的能源比必要的多。
 
-## Interrupt driven
+## 中断驱动
 
-To save power, we need to configure the application so that it can be notified when the button is pressed using an interrupt.
+为了节约能源，需要支持处理器睡眠，需要通过配置应用程序，使其能够在按钮被按下时通过中断得到通知时才执行相关任务。
 
-Once the interrupt is configured, the application can instruct the microcontroller to enter a sleep mode, consuming very little power.
+一旦配置了中断，应用程序就可以指示微控制器进入睡眠模式，消耗的能源显著减少。
 
-Given Embassy focus on async Rust (which we’ll come back to after this example), the example application must use a combination of the HAL and PAC in order to use interrupts. For this reason, the application also contains some helper functions to access the PAC (not shown below).
+考虑到Embassy的关注重点是异步Rust（我们将在本示例之后回到这个问题），示例应用程序必须使用HAL和PAC的组合才能使用中断。因此，应用程序还包含一些访问PAC的辅助函数（下面没有列出）。
 
 ```rust
 #![no_std]
@@ -182,15 +180,15 @@ fn EXTI15_10() {
 //
 ```
 
-The simple application is now more complex again, primarily because of the need to keep the button and LED states in the global scope where it is accessible by the main application loop, as well as the interrupt handler.
+简单的程序变得越来越复杂，主要是我们需要在全局范围内保存按钮和LED的状态，以便于主应用循环能像中断一样访问到它们。
 
-To do that, the types must be guarded by a mutex, and interrupts must be disabled whenever we are accessing this global state to gain access to the peripherals.
+要做到这一点，类型必须用锁来保护，并且当我们通过全局状态获得了外设的访问权限期间，中断必须被暂时屏蔽。
 
-Luckily, there is an elegant solution to this problem when using Embassy.
+幸运的是，在Embassy中，有一种很优雅的方式来解决这个问题。
 
-## Async version
+## 异步版本
 
-It’s time to use the Embassy capabilities to its fullest. At the core, Embassy has an async excecutor, or a runtime for async tasks if you will. The executor polls a set of tasks (defined at compile time), and whenever a task `blocks`, the executor will run another task, or put the microcontroller to sleep.
+现在是时候充分利用Embassy的功能了。最核心的内容是，Embassy有一个异步执行器，或者你可以理解为异步任务的运行时，执行器轮询一组任务（在编译时定义），每当一个任务被阻塞时，`执行器`将运行另一个任务，或者让微控制器进入睡眠状态。
 
 ```rust
 #![no_std]
@@ -219,18 +217,16 @@ async fn main(_spawner: Spawner) {
 }
 ```
 
-The async version looks very similar to the HAL version, apart from a few minor details:
+异步版本看起来与HAL版本非常相似，除了一些小细节：
 
-- The main entry point is annotated with a different macro and has an async type signature. This macro creates and starts an Embassy runtime instance and launches the main application task. Using the `Spawner` instance, the application may spawn other tasks.
+- 主入口点用不同的宏进行注释，并具有异步类型签名。此宏创建并启动Embassy运行时实例，并启动主应用程序任务。应用程序可以使用Spawner实例生成其他任务。
+- 外设初始化由main宏完成，并传递到主任务中。
+- 在检查按钮状态之前，应用程序会一直等待引脚状态的转换（ 低→高 或 高→低 ）。
 
-- The peripheral initialization is done by the main macro, and is handed to the main task.
+当`button.await_for_any_edge().await`被调用，如果没有其他任务可以执行，微控制器会暂停主任务并进入睡眠状态。Embassy HAL配置了按钮（在`ExtiButton`中）的中断处理程序，当中断发生时，等待按钮的任务都将被唤醒。
 
-- Before checking the button state, the application is awaiting a transition in the pin state (low → high or high → low).
+执行器的开销最小化、“并发”执行多个任务、极大简化应用程序等特点，让`异步`非常适用于嵌入式开发。
 
-When `button.await_for_any_edge().await` is called, the executor will pause the main task and put the microcontroller in sleep mode, unless there are other tasks that can run. Internally, the Embassy HAL has configured the interrupt handler for the button (in `ExtiButton`), so that whenever an interrupt is raised, the task awaiting the button will be woken up.
+## 总结
 
-The minimal overhead of the executor and the ability to run multiple tasks "concurrently" combined with the enormous simplification of the application, makes `async` a great fit for embedded.
-
-## Summary
-
-We have seen how the same application can be written at the different abstraction levels in Embassy. First starting out at the PAC level, then using the HAL, then using interrupts, and then using interrupts indirectly using async Rust.
+本章我们讲述了在不同的抽象层次中，如何用Embassy实现相同的应用程序。我们从PAC层次开始，然后是HAL，再是使用中断，最后是通过异步间接使用中断。

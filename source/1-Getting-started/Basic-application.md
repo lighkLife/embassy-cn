@@ -1,14 +1,15 @@
-# A basic Embassy application
 
-So you’ve got one of the [examples](https://embassy.dev/book/dev/examples.html) running, but what now? Let’s go through a simple Embassy application for the nRF52 DK to understand it better.
+# 基本应用示例
 
-## Main
+我们已经正常运行了一个[示例程序](https://embassy.dev/dev/examples.html)。接下来，我们通过一个运行在nRF52套件环境下的Embassy程序来更深入地了解它。
 
-The full example can be found [here](https://github.com/embassy-rs/embassy/tree/master/docs/modules/ROOT/examples/basic).
+## 详细内容
+
+本章的代码都在[这里](https://github.com/embassy-rs/embassy/tree/master/docs/modules/ROOT/examples/basic)
 
 ### Rust Nightly
 
-The first thing you’ll notice is a few declarations stating that Embassy requires some nightly features:
+首先，需要Rust工具链的Nightly版本。Embassy的一些状态定义用到了nightly中的某些特性，比如：
 
 ```rust
 #![no_std]
@@ -16,17 +17,17 @@ The first thing you’ll notice is a few declarations stating that Embassy requi
 #![feature(type_alias_impl_trait)]
 ```
 
-### Dealing with errors
+### 错误处理
 
-Then, what follows are some declarations on how to deal with panics and faults. During development, a good practice is to rely on `defmt-rtt` and `panic-probe` to print diagnostics to the terminal:
+接下来是关于错误和恐慌(panic)的处理，在开发过程中，比较好的做法是依靠defmt_rtt和panic_probe将诊断信息输出到终端：
 
 ```rust
 use {defmt_rtt as _, panic_probe as _}; // global logger
 ```
 
-### Task declaration
+### 任务描述
 
-After a bit of import declaration, the tasks run by the application should be declared:
+通过添加属性宏的方式，任务定义如下：
 
 ```rust
 #[embassy_executor::task]
@@ -40,16 +41,14 @@ async fn blinker(mut led: Output<'static, P0_13>, interval: Duration) {
 }
 ```
 
-An embassy task must be declared `async`, and may NOT take generic arguments. In this case, we are handed the LED that should be blinked and the interval of the blinking.
+Embassy中，任务必须被定义为异步的，**不能带有泛型参数**。在本例中，我们传入了两个参数：要操作的LED设备和闪烁的间隔时间。
 
-|     | Notice that there is no busy waiting going on in this task. It is using the Embassy timer to yield execution, allowing the microcontroller to sleep in between the blinking. |
-| --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+> **注意**  
+>Embassy并没有采用空转等待的方式，而是采用内部的计时器来实现出让执行(yield)，在闪烁周期内允许微控制器进入睡眠状态。(译者注：busy waiting going no，这里结合下文按意思来译的)
 
-### Main
+### main函数
 
-The main entry point of an Embassy application is defined using the `#[embassy_executor::main]` macro. The entry point is also required to take a `Spawner` and a `Peripherals` argument.
-
-The `Spawner` is the way the main application spawns other tasks. The `Peripherals` type comes from the HAL and holds all peripherals that the application may use. In this case, we want to configure one of the pins as a GPIO output driving the LED:
+Embassy应用的入口函数用`#[embassy_executor::main]`宏来定义，要求传入两个参数：`Spawner`、`Peripherals`。Spawner用于应用创建任务，`Spawner`是主任务创建其他任务的途径。 `Peripherals`来自HAL，它负责沟通可能用到的外设。本例中我们配置其中一根引脚，把它当作GPIO输出来驱动LED。
 
 ```rust
 #[embassy_executor::main]
@@ -61,21 +60,18 @@ async fn main(spawner: Spawner) {
 }
 ```
 
-What happens when the `blinker` task has been spawned and main returns? Well, the main entry point is actually just like any other task, except that you can only have one and it takes some specific type arguments. The magic lies within the `#[embassy_executor::main]` macro. The macro does the following:
+在blinker任务已经生成、main函数返回时，究竟发生了什么？主入口看起来跟其他任务没什么不同，除了它只能存在一个并且需要一些特殊类型的参数。主要的魔法来自`#[embassy_executor::main]`宏，它做了以下的事情：
 
-1. Creates an Embassy Executor
+1. 创建一个Embassy执行器。
+2. 初始化硬件层并通过Peripherals参数提供交互。
+3. 为程序入口定义主任务。
+4. 运行执行器生成主任务。
 
-2. Initializes the microcontroller HAL to get the `Peripherals`
+不使用宏也可以运行执行器。这种情况下，需要您手动实现`执行器`实例。
 
-3. Defines a main task for the entry point
+## Cargo.toml
 
-4. Runs the executor spawning the main task
-
-There is also a way to run the executor without using the macro, in which case you have to create the `Executor` instance yourself.
-
-## The Cargo.toml
-
-The project definition needs to contain the embassy dependencies:
+项目定义需要引入embassy相关的依赖：
 
 ```toml
 embassy-executor = { version = "0.3.0", path = "../../../../../embassy-executor", features = ["defmt", "nightly", "integrated-timers", "arch-cortex-m", "executor-thread"] }
@@ -83,6 +79,6 @@ embassy-time = { version = "0.1.4", path = "../../../../../embassy-time", featur
 embassy-nrf = { version = "0.1.0", path = "../../../../../embassy-nrf", features = ["defmt", "nrf52840", "time-driver-rtc1", "gpiote", "nightly"] }
 ```
 
-Depending on your microcontroller, you may need to replace `embassy-nrf` with something else (`embassy-stm32` for STM32. Remember to update feature flags as well).
+根据您的微控制器型号，选择相应的crate替换`embassy-nrf`，比如STM32用`embassy-stm32`，记得设置合适的`features`标记。
 
-In this particular case, the nrf52840 chip is selected, and the RTC1 peripheral is used as the time driver.
+在上面的示例中，使用了nrf52840芯片，选择了RTC1作为时间驱动器。
