@@ -1,6 +1,6 @@
 # 开发者文档：STM32
 
-原文： https://embassy.dev/book/dev/developer_stm32.html
+> 原文： https://embassy.dev/book/dev/developer_stm32.html
 ## 了解外设元信息（meta-pac）
 
 当一个项目编译导入`embassy-stm32` `crate` 时，该项目正在使用哪个的芯片，该项目就会使用哪个芯片对应的功能。根据这个特性，`embassy-stm32` 会选择芯片所支持的 [IP](https://anysilicon.com/ip-intellectual-property-core-semiconductors/) （半导体知识产权），并启用相应的硬件抽象层实现（HAL）。我们支持数百种芯片，但是`embassy-stm32` 是如何知道哪个芯片包含哪个 IP 呢？ 说来话长，这就算一个关于`stm32-data-sources` 的故事了。

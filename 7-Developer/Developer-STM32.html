@@ -219,7 +219,9 @@
         <article role="main">
           <div class="section" id="stm32">
 <h1>开发者文档：STM32<a class="headerlink" href="#stm32" title="永久链接至标题">#</a></h1>
-<p>原文： https://embassy.dev/book/dev/developer_stm32.html</p>
+<blockquote>
+<div><p>原文： https://embassy.dev/book/dev/developer_stm32.html</p>
+</div></blockquote>
 <div class="section" id="meta-pac">
 <h2>了解外设元信息（meta-pac）<a class="headerlink" href="#meta-pac" title="永久链接至标题">#</a></h2>
 <p>当一个项目编译导入<code class="docutils literal notranslate"><span class="pre">embassy-stm32</span></code> <code class="docutils literal notranslate"><span class="pre">crate</span></code> 时，该项目正在使用哪个的芯片，该项目就会使用哪个芯片对应的功能。根据这个特性，<code class="docutils literal notranslate"><span class="pre">embassy-stm32</span></code> 会选择芯片所支持的 <a class="reference external" href="https://anysilicon.com/ip-intellectual-property-core-semiconductors/">IP</a> （半导体知识产权），并启用相应的硬件抽象层实现（HAL）。我们支持数百种芯片，但是<code class="docutils literal notranslate"><span class="pre">embassy-stm32</span></code> 是如何知道哪个芯片包含哪个 IP 呢？ 说来话长，这就算一个关于<code class="docutils literal notranslate"><span class="pre">stm32-data-sources</span></code> 的故事了。</p>
