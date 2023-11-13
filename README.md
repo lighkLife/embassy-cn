@@ -19,4 +19,4 @@
 | [STM32](https://embassy.dev/book/dev/stm32.html)                                          |           |     |
 | [Bootloader](https://embassy.dev/book/dev/bootloader.html)                                | [StageGuard](https://github.com/StageGuard) | 已完成 |
 | [Examples](https://embassy.dev/book/dev/examples.html)                                    |           |     |
-| [Developers](https://embassy.dev/book/dev/developer.html)                                 |           |     |
+| [Developers](https://embassy.dev/book/dev/developer.html)                                 | [lighkLife](https://github.com/lighkLife/) | 进行中 |
