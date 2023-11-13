@@ -17,7 +17,7 @@
 | [Executor](https://embassy.dev/book/dev/runtime.html) | [LighkLife](https://github.com/lighkLife/) | 已完成 |     |
 | [HAL](https://embassy.dev/book/dev/hal.html) | [Luv_Ray](https://github.com/Luv-Ray/) | 已完成 |     |
 | [nRF](https://embassy.dev/book/dev/nrf.html) | [Luv_Ray](https://github.com/Luv-Ray/) | 已完成 |     |
-| [STM32](https://embassy.dev/book/dev/stm32.html) |  [LighkLife](https://github.com/lighkLife/) | 进行中 |     |
+| [STM32](https://embassy.dev/book/dev/stm32.html) |  [LighkLife](https://github.com/lighkLife/) | 已完成 |     |
 | [Bootloader](https://embassy.dev/book/dev/bootloader.html) | [StageGuard](https://github.com/StageGuard) | 已完成 |     |
 | [Examples](https://embassy.dev/book/dev/examples.html) |  [LighkLife](https://github.com/lighkLife/) | 已完成 |     |
 | [Developers](https://embassy.dev/book/dev/developer.html) | [LighkLife](https://github.com/lighkLife/) | 已完成 |     |
