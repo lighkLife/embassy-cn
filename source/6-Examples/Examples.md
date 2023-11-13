@@ -1,6 +1,5 @@
 # 例子
 
-Embassy provides examples for all HALs supported. You can find them in the `examples/` folder.
 Embassy 提供了所有支持的 HAL 的示例。你可以在`examples/` 目录下找到它们
 
 主循环例子
