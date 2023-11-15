@@ -6,18 +6,6 @@
 下一代嵌入式应用框架 Embassy 
 ================================
 
-.. toctree::
-   
-   0-Embassy/Embassy
-   1-Getting-started/index
-   2-Bare-metal-to-async/index
-   3-Executor/index
-   4-HAL/index
-   5-Bootloader/index
-   6-Examples/index
-   7-Developer/index
-
-
 通过使用 Rust 编程语言、其异步功能以及 Embassy 库，更快地编写安全、正确且节能的嵌入式代码。
 
 `马上开始 <https://lighklife.github.io/embassy-cn/1-Getting-started/index.html>`_
@@ -128,6 +116,17 @@ Bootloader and DFU
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 `embassy-boot <https://github.com/embassy-rs/embassy/tree/master/embassy-boot>`_  是一个轻量级的启动器，它支持固件加载，支持以电源故障安全的方式升级固件，支持试用引导和回滚。
+
+.. toctree::
+   
+   0-Embassy/Embassy
+   1-Getting-started/index
+   2-Bare-metal-to-async/index
+   3-Executor/index
+   4-HAL/index
+   5-Bootloader/index
+   6-Examples/index
+   7-Developer/index
 
 
 Copyright © 2019-2023 Embassy project contributors
