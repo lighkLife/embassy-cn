@@ -133,5 +133,3 @@ Bootloader and DFU
 Copyright © 2019-2023 Embassy project contributors
 
 `Privacy <https://embassy.dev/privacy/>`_    `Sitemap <https://embassy.dev/sitemap.xml>`_
-
-`Privacy <https://embassy.dev/privacy/>`_    `Sitemap <https://embassy.dev/sitemap.xml>`_ 
