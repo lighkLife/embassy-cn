@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<!-- saved from url=(0020)https://embassy.dev/ -->
+<html lang="en"><script id="allow-copy_script">(function agent() {
+    let unlock = false
+    document.addEventListener('allow_copy', (event) => {
+      unlock = event.detail.unlock
+    })
+
+    const copyEvents = [
+      'copy',
+      'cut',
+      'contextmenu',
+      'selectstart',
+      'mousedown',
+      'mouseup',
+      'mousemove',
+      'keydown',
+      'keypress',
+      'keyup',
+    ]
+    const rejectOtherHandlers = (e) => {
+      if (unlock) {
+        e.stopPropagation()
+        if (e.stopImmediatePropagation) e.stopImmediatePropagation()
+      }
+    }
+    copyEvents.forEach((evt) => {
+      document.documentElement.addEventListener(evt, rejectOtherHandlers, {
+        capture: true,
+      })
+    })
+  })()</script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Embassy</title>
+
+  
+    
+      <meta name="description" content="The next-generation framework for embedded applications. Write safe, correct and energy-efficient embedded code faster, using the Rust programming language, its async facilities, and the Embassy libraries.">
+      <meta name="twitter:description" content="The next-generation framework for embedded applications. Write safe, correct and energy-efficient embedded code faster, using the Rust programming language, its async facilities, and the Embassy libraries.">
+      <meta property="og:description" content="The next-generation framework for embedded applications. Write safe, correct and energy-efficient embedded code faster, using the Rust programming language, its async facilities, and the Embassy libraries.">
+    
+  
+
+  
+    <meta name="keywords" content="embedded, framework, library, rust, async, stm32, nrf, nordic, rtos, operating system">
+  
+
+  <meta name="author" content="Embassy">
+  <meta name="copyright" content="Embassy">
+
+  
+  
+  <meta name="referrer" content="no-referrer-when-downgrade">
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index,follow">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+  <link rel="stylesheet" href="./Embassy_files/abridge.css">
+  
+  <link rel="shortcut icon" href="https://embassy.dev/favicon.png" sizes="16x16" type="image/png">
+  
+  <link rel="canonical" href="https://embassy.dev/">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://embassy.dev/atom.xml">
+  
+
+  
+    <meta property="og:title" content="Embassy">
+    <meta name="twitter:title" content="Embassy">
+  
+
+  <meta property="og:site_name" content="Embassy">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:type" content="website">
+  <meta property="og:updated_time" content="2023-02-05T20:52:01.712800512+00:00">
+
+  <meta property="og:url" content="https://embassy.dev/">
+  <meta name="twitter:url" content="https://embassy.dev/">
+
+  
+
+  
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:image" content="https://embassy.dev/banner.png">
+      <meta property="og:image" content="https://embassy.dev/banner.png">
+  
+
+
+<input type="hidden" id="_w_simile" data-inspect-config="3"><script type="text/javascript" src="chrome-extension://odphnbhiddhdpoccbialllejaajemdio/scripts/inspector.js"></script></head>
+<body>
+<header>
+  <nav>
+    <header>
+      <h1><a href="https://embassy.dev/">Embassy</a></h1>
+    </header>
+    <div overflow="">
+      <ul>
+        <li><h2><a href="https://embassy.dev/">关于</a></h2></li><li><h2><a href="https://embassy.dev/book/">文档</a></h2></li><li><h2><a href="https://docs.embassy.dev/">API 参考</a></h2></li><li><h2><a href="https://embassy.dev/blog/">博客</a></h2></li><li><h2><a href="https://matrix.to/#/#embassy-rs:matrix.org">聊天</a></h2></li><li><h2><a href="https://github.com/embassy-rs/embassy">GitHub</a></h2></li>
+      </ul>
+    </div>
+  </nav>
+  
+  <hr>
+</header>
+<main>
+
+<div style="text-align: center; margin: 50px auto; max-width: 700px;">
+	<h1>下一代嵌入式应用框架</h1>
+	<p>通过使用Rust编程语言、其异步功能以及Embassy库，更快地编写安全、正确且节能的嵌入式代码。</p>
+	<div style="margin: 30px;">
+		<a class="button" href="https://embassy.dev/book/dev/getting_started.html">马上开始</a>
+	</div>
+</div>
+<div class="row">
+	<div>
+		<h2>Rust + async ❤️ 嵌入式</h2>
+		<p>
+			<a href="https://www.rust-lang.org/"> Rust编程语言</a>具有极快的执行速度和高效的内存利用，且不依赖运行时、垃圾回收器或操作系统。得益于其完善的内存与线程安全性以及表达性强大的类型系统，它在编译时就能够捕捉到多种类型的错误。
+		</p>
+		<p>
+			Rust 的<a href="https://rust-lang.github.io/async-book/">异步/等待（async/await）</a>机制在嵌入式系统中提供了前所未有的轻松且高效的多任务处理方式。任务会在编译时被转换成能够协作运行的状态机。同时，它不需要动态内存分配，且能在单一堆栈上运行，因此不需要对每个任务的堆栈大小进行调整。它淘汰了传统实时操作系统（RTOS）对内核上下文切换的的需求，并且在速度和占用空间上都<a href="https://tweedegolf.nl/en/blog/65/async-rust-vs-rtos-showdown">更快更小</a>。
+		</p>
+
+	</div>
+	<div>
+<pre data-lang="rust" style="background-color:#212121;color:#eeffff;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="color:#c792ea;">use </span><span>defmt</span><span style="color:#89ddff;">::</span><span>info</span><span style="color:#89ddff;">;
+</span><span style="color:#c792ea;">use </span><span>embassy</span><span style="color:#89ddff;">::</span><span>executor</span><span style="color:#89ddff;">::</span><span>Spawner</span><span style="color:#89ddff;">;
+</span><span style="color:#c792ea;">use </span><span>embassy</span><span style="color:#89ddff;">::</span><span>time</span><span style="color:#89ddff;">::{</span><span>Duration</span><span style="color:#89ddff;">,</span><span> Timer</span><span style="color:#89ddff;">};
+</span><span style="color:#c792ea;">use </span><span>embassy_nrf</span><span style="color:#89ddff;">::</span><span>gpio</span><span style="color:#89ddff;">::{</span><span>AnyPin</span><span style="color:#89ddff;">,</span><span> Input</span><span style="color:#89ddff;">,</span><span> Level</span><span style="color:#89ddff;">,</span><span> Output</span><span style="color:#89ddff;">,</span><span> OutputDrive</span><span style="color:#89ddff;">,</span><span> Pin</span><span style="color:#89ddff;">,</span><span> Pull</span><span style="color:#89ddff;">};
+</span><span style="color:#c792ea;">use </span><span>embassy_nrf</span><span style="color:#89ddff;">::</span><span>Peripherals</span><span style="color:#89ddff;">;
+</span><span>
+</span><span style="font-style:italic;color:#4a4a4a;">// Declare async tasks
+</span><span style="color:#89ddff;">#[</span><span>embassy::task</span><span style="color:#89ddff;">]
+</span><span>async </span><span style="font-style:italic;color:#c792ea;">fn </span><span style="color:#82aaff;">blink</span><span style="color:#89ddff;">(</span><span style="color:#f78c6c;">pin</span><span style="color:#89ddff;">:</span><span> AnyPin</span><span style="color:#89ddff;">) {
+</span><span>    </span><span style="font-style:italic;color:#c792ea;">let </span><span style="color:#c792ea;">mut</span><span> led </span><span style="color:#89ddff;">= </span><span>Output</span><span style="color:#89ddff;">::</span><span>new</span><span style="color:#89ddff;">(</span><span>pin</span><span style="color:#89ddff;">, </span><span>Level</span><span style="color:#89ddff;">::</span><span>Low</span><span style="color:#89ddff;">, </span><span>OutputDrive</span><span style="color:#89ddff;">::</span><span>Standard</span><span style="color:#89ddff;">);
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#c792ea;">loop </span><span style="color:#89ddff;">{
+</span><span>        </span><span style="font-style:italic;color:#4a4a4a;">// Timekeeping is globally available, no need to mess with hardware timers.
+</span><span>        led</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">set_high</span><span style="color:#89ddff;">();
+</span><span>        Timer</span><span style="color:#89ddff;">::</span><span>after</span><span style="color:#89ddff;">(</span><span>Duration</span><span style="color:#89ddff;">::</span><span>from_millis</span><span style="color:#89ddff;">(</span><span style="color:#f78c6c;">150</span><span style="color:#89ddff;">)).</span><span>await</span><span style="color:#89ddff;">;
+</span><span>        led</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">set_low</span><span style="color:#89ddff;">();
+</span><span>        Timer</span><span style="color:#89ddff;">::</span><span>after</span><span style="color:#89ddff;">(</span><span>Duration</span><span style="color:#89ddff;">::</span><span>from_millis</span><span style="color:#89ddff;">(</span><span style="color:#f78c6c;">150</span><span style="color:#89ddff;">)).</span><span>await</span><span style="color:#89ddff;">;
+</span><span>    </span><span style="color:#89ddff;">}
+</span><span style="color:#89ddff;">}
+</span><span>
+</span><span style="font-style:italic;color:#4a4a4a;">// Main is itself an async task as well.
+</span><span style="color:#89ddff;">#[</span><span>embassy::main</span><span style="color:#89ddff;">]
+</span><span>async </span><span style="font-style:italic;color:#c792ea;">fn </span><span style="color:#82aaff;">main</span><span style="color:#89ddff;">(</span><span style="color:#f78c6c;">spawner</span><span style="color:#89ddff;">:</span><span> Spawner, </span><span style="color:#f78c6c;">p</span><span style="color:#89ddff;">:</span><span> Peripherals</span><span style="color:#89ddff;">) {
+</span><span>    </span><span style="font-style:italic;color:#4a4a4a;">// Spawned tasks run in the background, concurrently.
+</span><span>    spawner</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">spawn</span><span style="color:#89ddff;">(</span><span style="color:#82aaff;">blink</span><span style="color:#89ddff;">(</span><span>p</span><span style="color:#89ddff;">.</span><span>P0_13</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">degrade</span><span style="color:#89ddff;">())).</span><span style="color:#82aaff;">unwrap</span><span style="color:#89ddff;">();
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#c792ea;">let </span><span style="color:#c792ea;">mut</span><span> button </span><span style="color:#89ddff;">= </span><span>Input</span><span style="color:#89ddff;">::</span><span>new</span><span style="color:#89ddff;">(</span><span>p</span><span style="color:#89ddff;">.</span><span>P0_11</span><span style="color:#89ddff;">, </span><span>Pull</span><span style="color:#89ddff;">::</span><span>Up</span><span style="color:#89ddff;">);
+</span><span>    </span><span style="font-style:italic;color:#c792ea;">loop </span><span style="color:#89ddff;">{
+</span><span>        </span><span style="font-style:italic;color:#4a4a4a;">// Asynchronously wait for GPIO events, allowing other tasks
+</span><span>        </span><span style="font-style:italic;color:#4a4a4a;">// to run, or the core to sleep.
+</span><span>        button</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">wait_for_low</span><span style="color:#89ddff;">().</span><span>await</span><span style="color:#89ddff;">;
+</span><span>        info!</span><span style="color:#89ddff;">("</span><span style="color:#c3e88d;">Button pressed!</span><span style="color:#89ddff;">");
+</span><span>        button</span><span style="color:#89ddff;">.</span><span style="color:#82aaff;">wait_for_high</span><span style="color:#89ddff;">().</span><span>await</span><span style="color:#89ddff;">;
+</span><span>        info!</span><span style="color:#89ddff;">("</span><span style="color:#c3e88d;">Button released!</span><span style="color:#89ddff;">");
+</span><span>    </span><span style="color:#89ddff;">}
+</span><span style="color:#89ddff;">}
+</span></code></pre>
+
+	</div>
+</div>
+
+<div style="text-align: center; margin: 50px auto; max-width: 700px;">
+	<h1>包含的组件</h1>
+</div>
+
+
+<div class="grid">
+	<div>
+		<h3>硬件抽象层</h3>
+		<p>
+			HAL提供了安全易用的接口来操作硬件，无需再对原始寄存器进行操作。
+		</p>
+		<p>
+			Embassy维护了下列硬件的HAL，但它并不局限于此，您可以在任何使用Embassy的项目中使用HAL。
+		</p><ul>
+			<li><a href="https://docs.embassy.dev/embassy-stm32/">embassy-stm32</a>, 支持STM32微控制器系列</li>
+			<li><a href="https://docs.embassy.dev/embassy-nrf/">embassy-nrf</a>, 支持北欧半导体公司(the Nordic Semiconducotr)的nRF52、nRF53、nRF91系列</li>
+		</ul>
+	</div>
+	<div>
+		<h3>简单易用的时间处理</h3>
+		<p>
+			不再为硬件定时器所烦恼<a href="https://docs.embassy.dev/embassy-time/">embassy::time</a>
+			提供了全局可用且不会溢出的 Instant、Duration 和 Timer 类型。
+		</p>
+	</div>
+	<div>
+		<h3>可靠的实时性</h3>
+		<p>
+		相同的异步执行器上的任务以相互协调的方式运行。但您可以创建多个具有不同优先级的执行器，使更高优先级的任务可以抢占较低优先级任务的运行。具体请参见<a href="https://github.com/embassy-rs/embassy/blob/master/examples/nrf52840/src/bin/multiprio.rs">示例</a>。
+	</p></div>
+	<div>
+		<h3>低能耗</h3>
+		<p>轻松构建电池寿命更长的设备。.
+		</p><p>
+			异步执行器闲置时自动将核心置于睡眠状态。任务可通过中断将其唤醒，无需在等待时进行忙等轮询（busy-loop polling）。
+	</p></div>
+	<div>
+		<h3>网络</h3>
+		<p><a href="https://docs.embassy.dev/embassy-net/">embassy-net</a> 实现了常用的网络功能，包括以太网、IP、TCP、UDP、ICMP和DHCP。在管理超时和同时为多个连接提供服务方面，Async做了高度简化，提供了很大的便利。
+	</p></div>
+	<div>
+		<h3>蓝牙</h3>
+		<p><a href="https://github.com/embassy-rs/nrf-softdevice">nrf-softdevice</a> 为nRF52微控制器提供蓝牙低能耗4.x和5.x支持
+	</p></div>
+	<div>
+		<h3>LoRa</h3>
+		<p><a href="https://docs.embassy.dev/embassy-lora/">embassy-lora</a> 支持STM32WL无线微控制器和Semtech SX127x收发器上的LoRa网络。
+	</p></div>
+	<div>
+		<h3>USB</h3>
+		<p><a href="https://docs.embassy.dev/embassy-usb/">embassy-usb</a> i实现了设备侧的USB堆栈。实现了通用类（如USB串行（CDC ACM），支持USB HID，并且提供丰富的构建器API方便构建您自己的实现。
+	</p></div>
+	<div>
+		<h3>Bootloader and DFU</h3>
+		<p><a href="https://github.com/embassy-rs/embassy/tree/master/embassy-boot">embassy-boot</a> 是一个轻量级的启动器，它支持固件加载，支持以电源故障安全的方式升级固件，支持试用引导和回滚。
+	</p></div>
+</div>
+
+<!--
+
+TODO write about these things:
+
+- Hardware support
+	- STM32
+	- nRF
+
+- Batteries included, but optional
+	- Timekeeping that Just Works
+	- Real-time ready
+	- Low-power friendly
+	- Great for IoT, communication-heavy projects
+		- Networking
+		- USB
+		- LoRa
+		- Bluetooth
+	- Bootloader
+	- Vibrant Ecosystem
+		- embedded-hal
+		- hundreds of drivers, link to awesome-embedded-rust
+
+- Is embassy an RTOS? (maybe better for a blog post)
+
+- Production-ready
+	- Akiles testimonial
+	- Others??? :) 
+-->
+
+
+</main>
+<footer>
+  <hr>
+  <center>
+    <p><span>
+      <a href="https://embassy.dev/atom.xml" target="_blank"><span class="svg rss" title="Rss"></span></a>
+
+
+
+
+
+
+
+
+
+
+      <a href="https://github.com/embassy-rs/" target="_blank"><span class="svg github" title="Github"></span></a>
+
+
+
+
+
+
+
+
+
+    </span></p>
+    <p>Copyright © 2019-2023 Embassy project contributors</p>
+    <p><a href="https://embassy.dev/privacy/">Privacy</a> &nbsp; <a href="https://embassy.dev/sitemap.xml">Sitemap</a> &nbsp; </p>
+    
+    
+  </center>
+</footer>
+
+
+<deepl-input-controller><template shadowrootmode="open"><link rel="stylesheet" href="chrome-extension://fancfknaplihpclbhbpclnmmjcjanbaf/build/content.css"><div><div class="dl-input-translation-container svelte-ju4595"><div></div></div></div></template></deepl-input-controller></body></html>

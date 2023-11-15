@@ -10,7 +10,7 @@
 
 | 原章节 | 译者  | 状态  | 校对  |
 | --- | --- | --- | --- |
-| [主页](https://embassy.dev/) |   |  |     |
+| [主页](https://embassy.dev/) | [StaRainorigin](https://github.com/StaRainorigin) | 已完成 |     |
 | [Embassy](https://embassy.dev/book/dev/index.html) | [ziyouwa](https://github.com/ziyouwa/) | 已完成 |     |
 | [Getting started](https://embassy.dev/book/dev/getting_started.html) | [ziyouwa](https://github.com/ziyouwa/) | 已完成 |     |
 | [Basic application](https://embassy.dev/book/dev/basic_application.html) | [ziyouwa](https://github.com/ziyouwa/) | 已完成 |     |
