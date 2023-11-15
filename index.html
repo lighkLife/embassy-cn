@@ -133,7 +133,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -211,14 +211,14 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <div class="section" id="welcome-to-embassy-cn-s-documentation">
-<h1>Welcome to embassy-cn’s documentation!<a class="headerlink" href="#welcome-to-embassy-cn-s-documentation" title="永久链接至标题">#</a></h1>
+          <div class="section" id="embassy">
+<h1>下一代嵌入式应用框架 Embassy<a class="headerlink" href="#embassy" title="永久链接至标题">#</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="0-Embassy/Embassy.html">Embassy</a><ul>
@@ -229,7 +229,13 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="1-Getting-started/index.html">快速开始</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="1-Getting-started/Basic-application.html">基本应用示例</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="1-Getting-started/Basic-application.html#id2">详细内容</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1-Getting-started/Basic-application.html#id2">详细内容</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="1-Getting-started/Basic-application.html#rust-nightly">Rust Nightly</a></li>
+<li class="toctree-l4"><a class="reference internal" href="1-Getting-started/Basic-application.html#id3">错误处理</a></li>
+<li class="toctree-l4"><a class="reference internal" href="1-Getting-started/Basic-application.html#id4">任务描述</a></li>
+<li class="toctree-l4"><a class="reference internal" href="1-Getting-started/Basic-application.html#main">main函数</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="1-Getting-started/Basic-application.html#cargo-toml">Cargo.toml</a></li>
 </ul>
 </li>
@@ -306,6 +312,103 @@
 </li>
 </ul>
 </div>
+<p>通过使用 Rust 编程语言、其异步功能以及 Embassy 库，更快地编写安全、正确且节能的嵌入式代码。</p>
+<div class="section" id="id2">
+<h2><a class="reference external" href="https://lighklife.github.io/embassy-cn/1-Getting-started/index.html">马上开始</a><a class="headerlink" href="#id2" title="永久链接至标题">#</a></h2>
+</div>
+<div class="section" id="rust-async">
+<h2>Rust + async ❤️ 嵌入式<a class="headerlink" href="#rust-async" title="永久链接至标题">#</a></h2>
+<p><a class="reference external" href="https://www.rust-lang.org/">Rust编程语言</a> 具有极快的执行速度和高效的内存利用，且不依赖运行时、垃圾回收器或操作系统。得益于其完善的内存与线程安全性以及表达性强大的类型系统，它在编译时就能够捕捉到多种类型的错误。</p>
+<p>Rust 的 <a class="reference external" href="https://rust-lang.github.io/async-book/">异步/等待(async/await)</a>  机制在嵌入式系统中提供了前所未有的轻松且高效的多任务处理方式。任务会在编译时被转换成能够协作运行的状态机。同时，它不需要动态内存分配，且能在单一堆栈上运行，因此不需要对每个任务的堆栈大小进行调整。它淘汰了传统实时操作系统（RTOS）对内核上下文切换的的需求，并且在速度和占用空间上都 <a class="reference external" href="https://tweedegolf.nl/en/blog/65/async-rust-vs-rtos-showdown">更快更小</a> 。</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">use</span><span class="w"> </span><span class="n">defmt</span>::<span class="n">info</span><span class="p">;</span>
+<span class="k">use</span><span class="w"> </span><span class="n">embassy</span>::<span class="n">executor</span>::<span class="n">Spawner</span><span class="p">;</span>
+<span class="k">use</span><span class="w"> </span><span class="n">embassy</span>::<span class="n">time</span>::<span class="p">{</span><span class="n">Duration</span><span class="p">,</span><span class="w"> </span><span class="n">Timer</span><span class="p">};</span>
+<span class="k">use</span><span class="w"> </span><span class="n">embassy_nrf</span>::<span class="n">gpio</span>::<span class="p">{</span><span class="n">AnyPin</span><span class="p">,</span><span class="w"> </span><span class="n">Input</span><span class="p">,</span><span class="w"> </span><span class="n">Level</span><span class="p">,</span><span class="w"> </span><span class="n">Output</span><span class="p">,</span><span class="w"> </span><span class="n">OutputDrive</span><span class="p">,</span><span class="w"> </span><span class="n">Pin</span><span class="p">,</span><span class="w"> </span><span class="n">Pull</span><span class="p">};</span>
+<span class="k">use</span><span class="w"> </span><span class="n">embassy_nrf</span>::<span class="n">Peripherals</span><span class="p">;</span>
+
+<span class="c1">// Declare async tasks</span>
+<span class="cp">#[embassy::task]</span>
+<span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">blink</span><span class="p">(</span><span class="n">pin</span>: <span class="nc">AnyPin</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">led</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Output</span>::<span class="n">new</span><span class="p">(</span><span class="n">pin</span><span class="p">,</span><span class="w"> </span><span class="n">Level</span>::<span class="n">Low</span><span class="p">,</span><span class="w"> </span><span class="n">OutputDrive</span>::<span class="n">Standard</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">loop</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Timekeeping is globally available, no need to mess with hardware timers.</span>
+<span class="w">        </span><span class="n">led</span><span class="p">.</span><span class="n">set_high</span><span class="p">();</span>
+<span class="w">        </span><span class="n">Timer</span>::<span class="n">after</span><span class="p">(</span><span class="n">Duration</span>::<span class="n">from_millis</span><span class="p">(</span><span class="mi">150</span><span class="p">)).</span><span class="k">await</span><span class="p">;</span>
+<span class="w">        </span><span class="n">led</span><span class="p">.</span><span class="n">set_low</span><span class="p">();</span>
+<span class="w">        </span><span class="n">Timer</span>::<span class="n">after</span><span class="p">(</span><span class="n">Duration</span>::<span class="n">from_millis</span><span class="p">(</span><span class="mi">150</span><span class="p">)).</span><span class="k">await</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Main is itself an async task as well.</span>
+<span class="cp">#[embassy::main]</span>
+<span class="k">async</span><span class="w"> </span><span class="k">fn</span> <span class="nf">main</span><span class="p">(</span><span class="n">spawner</span>: <span class="nc">Spawner</span><span class="p">,</span><span class="w"> </span><span class="n">p</span>: <span class="nc">Peripherals</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Spawned tasks run in the background, concurrently.</span>
+<span class="w">    </span><span class="n">spawner</span><span class="p">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">blink</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">P0_13</span><span class="p">.</span><span class="n">degrade</span><span class="p">())).</span><span class="n">unwrap</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">button</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Input</span>::<span class="n">new</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">P0_11</span><span class="p">,</span><span class="w"> </span><span class="n">Pull</span>::<span class="n">Up</span><span class="p">);</span>
+<span class="w">    </span><span class="k">loop</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Asynchronously wait for GPIO events, allowing other tasks</span>
+<span class="w">        </span><span class="c1">// to run, or the core to sleep.</span>
+<span class="w">        </span><span class="n">button</span><span class="p">.</span><span class="n">wait_for_low</span><span class="p">().</span><span class="k">await</span><span class="p">;</span>
+<span class="w">        </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;Button pressed!&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">button</span><span class="p">.</span><span class="n">wait_for_high</span><span class="p">().</span><span class="k">await</span><span class="p">;</span>
+<span class="w">        </span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;Button released!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>包含的组件<a class="headerlink" href="#id4" title="永久链接至标题">#</a></h2>
+<div class="section" id="id5">
+<h3>硬件抽象层<a class="headerlink" href="#id5" title="永久链接至标题">#</a></h3>
+<p>HAL提供了安全易用的接口来操作硬件，无需再对原始寄存器进行操作。</p>
+<p>Embassy 维护了下列硬件的 HAL ，但它并不局限于此，您可以在任何使用 Embassy 的项目中使用 HAL 。</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://lighklife.github.io/embassy-cn/4-HAL/STM32.html">embassy-stm32</a>  , 支持 STM32 微控制器系列</p></li>
+<li><p><a class="reference external" href="https://lighklife.github.io/embassy-cn/4-HAL/nRF.html">embassy-nrf</a>  , 支持北欧半导体公司 (the Nordic Semiconducotr)  的 nRF52、nRF53、nRF91 系列</p></li>
+</ul>
+</div>
+<div class="section" id="id6">
+<h3>时间处理<a class="headerlink" href="#id6" title="永久链接至标题">#</a></h3>
+<p>不用再因硬件定时器而烦恼。</p>
+<p><a class="reference external" href="https://docs.embassy.dev/embassy-time/">embassy::time</a>  提供了全局可用且不会溢出的 <code class="docutils literal notranslate"><span class="pre">Instant</span></code>、<code class="docutils literal notranslate"><span class="pre">Duration</span></code> 和 <code class="docutils literal notranslate"><span class="pre">Timer</span></code> 类型。</p>
+</div>
+<div class="section" id="id7">
+<h3>实时性<a class="headerlink" href="#id7" title="永久链接至标题">#</a></h3>
+<p>相同的异步执行器上的任务会以相互协调的方式运行。</p>
+<p>但您可以创建多个具有不同优先级的执行器，使更高优先级的任务可以抢占较低优先级任务的运行。具体请参见 <a class="reference external" href="https://github.com/embassy-rs/embassy/blob/master/examples/nrf52840/src/bin/multiprio.rs">示例</a> 。</p>
+</div>
+<div class="section" id="id9">
+<h3>低能耗<a class="headerlink" href="#id9" title="永久链接至标题">#</a></h3>
+<p>轻松构建电池寿命更长的设备。</p>
+<p>异步执行器闲置时自动将核心置于睡眠状态。任务可通过中断将其唤醒，无需在等待时进行忙等轮询（busy-loop polling）。</p>
+</div>
+<div class="section" id="id10">
+<h3>网络<a class="headerlink" href="#id10" title="永久链接至标题">#</a></h3>
+<p><a class="reference external" href="https://docs.embassy.dev/embassy-net/">embassy-net</a>  实现了常用的网络功能，包括以太网、IP、TCP、UDP、ICMP和DHCP。在管理超时和同时为多个连接提供服务方面，Async 做了高度简化，提供了很大的便利。</p>
+</div>
+<div class="section" id="id11">
+<h3>蓝牙<a class="headerlink" href="#id11" title="永久链接至标题">#</a></h3>
+<p><a class="reference external" href="https://github.com/embassy-rs/nrf-softdevice">nrf-softdevice</a>  为 nRF52 微控制器提供蓝牙低能耗 4.x 和 5.x 支持。</p>
+</div>
+<div class="section" id="lora">
+<h3>LoRa<a class="headerlink" href="#lora" title="永久链接至标题">#</a></h3>
+<p><a class="reference external" href="https://docs.embassy.dev/embassy-lora/">embassy-lora</a>  支持 STM32WL 无线微控制器和 Semtech SX127x 收发器上的 LoRa 网络。</p>
+</div>
+<div class="section" id="usb">
+<h3>USB<a class="headerlink" href="#usb" title="永久链接至标题">#</a></h3>
+<p><a class="reference external" href="https://docs.embassy.dev/embassy-usb/">embassy-usb</a>  实现了设备侧的USB堆栈。实现了通用类（如USB串行（CDC ACM），支持 USB HID ，并且提供丰富的构建器API方便构建您自己的实现。</p>
+</div>
+<div class="section" id="bootloader-and-dfu">
+<h3>Bootloader and DFU<a class="headerlink" href="#bootloader-and-dfu" title="永久链接至标题">#</a></h3>
+<p><a class="reference external" href="https://github.com/embassy-rs/embassy/tree/master/embassy-boot">embassy-boot</a>  是一个轻量级的启动器，它支持固件加载，支持以电源故障安全的方式升级固件，支持试用引导和回滚。</p>
+<p>Copyright © 2019-2023 Embassy project contributors</p>
+<p><a class="reference external" href="https://embassy.dev/privacy/">Privacy</a>    <a class="reference external" href="https://embassy.dev/sitemap.xml">Sitemap</a></p>
+<p><a class="reference external" href="https://embassy.dev/privacy/">Privacy</a>    <a class="reference external" href="https://embassy.dev/sitemap.xml">Sitemap</a></p>
+</div>
+</div>
 </div>
 
         </article>
@@ -343,8 +446,40 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            目录
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">下一代嵌入式应用框架 Embassy</a><ul>
+<li><a class="reference internal" href="#id2">马上开始</a></li>
+<li><a class="reference internal" href="#rust-async">Rust + async ❤️ 嵌入式</a></li>
+<li><a class="reference internal" href="#id4">包含的组件</a><ul>
+<li><a class="reference internal" href="#id5">硬件抽象层</a></li>
+<li><a class="reference internal" href="#id6">时间处理</a></li>
+<li><a class="reference internal" href="#id7">实时性</a></li>
+<li><a class="reference internal" href="#id9">低能耗</a></li>
+<li><a class="reference internal" href="#id10">网络</a></li>
+<li><a class="reference internal" href="#id11">蓝牙</a></li>
+<li><a class="reference internal" href="#lora">LoRa</a></li>
+<li><a class="reference internal" href="#usb">USB</a></li>
+<li><a class="reference internal" href="#bootloader-and-dfu">Bootloader and DFU</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
